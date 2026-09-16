@@ -23,8 +23,9 @@ export default function MetaRow({
       <div className="flex min-w-0 flex-1 items-center gap-3">
         {icon}
         <div className="flex min-w-0 flex-col gap-3">
+          {/* 줄바꿈 시 줄 간격을 위해 leading 1.3을 주고, 음수 margin으로 한 줄일 때 높이는 leading-none과 같게 유지 */}
           <span
-            className={`text-base leading-none transition-colors duration-150 group-hover:text-muted ${
+            className={`-my-[0.15em] text-base leading-[1.3] transition-colors duration-150 group-hover:text-muted ${
               titleWeight === "semibold" ? "font-semibold" : "font-medium"
             }`}
           >
