@@ -20,7 +20,7 @@ export default function LanguageSwitcher({ lang }: { lang: Locale }) {
   return (
     <Link
       href={switchPath(pathname, target)}
-      className="flex items-center gap-2 rounded-full border border-surface-border bg-background px-3.5 py-2 text-sm font-medium text-muted transition-colors duration-150 hover:text-primary"
+      className="flex items-center gap-2 rounded-full border border-surface-border bg-background px-3.5 py-2 text-sm leading-none font-medium text-muted transition-colors duration-150 hover:text-primary"
     >
       <GlobeIcon className="size-4" />
       {getDictionary(lang).footer.languageName}

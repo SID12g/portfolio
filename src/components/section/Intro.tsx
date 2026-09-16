@@ -7,10 +7,10 @@ export default function Intro({ lang }: { lang: Locale }) {
 
   return (
     <section id="intro" className="flex w-full flex-col gap-8">
-      <h2 className="text-xl font-bold tracking-tight">
+      <h2 className="text-xl leading-none font-bold">
         {dict.sections.intro}
       </h2>
-      <div className="flex flex-col gap-3 text-base leading-[1.7] font-medium text-muted">
+      <div className="flex flex-col gap-3 text-base leading-[1.7] font-medium tracking-[-0.02em] text-muted">
         {dict.intro.paragraphs.map((segments, i) => (
           <p key={i}>
             {segments.map((segment, j) => (

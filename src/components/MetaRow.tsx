@@ -14,7 +14,7 @@ export default function MetaRow({
   subtitle: string;
   trailing?: ReactNode;
 }) {
-  const titleClassName = "text-base font-semibold tracking-tight";
+  const titleClassName = "text-base leading-none font-semibold";
 
   return (
     <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2">
@@ -33,11 +33,13 @@ export default function MetaRow({
           ) : (
             <span className={titleClassName}>{title}</span>
           )}
-          <span className="text-sm font-medium text-muted">{subtitle}</span>
+          <span className="text-sm leading-none font-medium text-muted">
+            {subtitle}
+          </span>
         </div>
       </div>
       {trailing && (
-        <span className="shrink-0 text-sm font-normal whitespace-nowrap text-muted">
+        <span className="shrink-0 text-sm leading-none font-normal whitespace-nowrap text-muted">
           {trailing}
         </span>
       )}

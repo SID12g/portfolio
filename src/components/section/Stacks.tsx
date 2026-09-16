@@ -7,7 +7,7 @@ export default function Stacks({ lang }: { lang: Locale }) {
 
   return (
     <section id="stack" className="flex w-full flex-col gap-8">
-      <h2 className="text-xl font-bold tracking-tight">
+      <h2 className="text-xl leading-none font-bold">
         {dict.sections.stack}
       </h2>
       <div className="flex flex-col gap-10">
@@ -16,7 +16,7 @@ export default function Stacks({ lang }: { lang: Locale }) {
             key={category.label}
             className="flex flex-col gap-3 sm:flex-row sm:gap-10"
           >
-            <p className="shrink-0 text-sm font-medium text-muted sm:w-[100px]">
+            <p className="shrink-0 text-sm leading-none font-medium text-muted sm:w-[100px]">
               {category.label}
             </p>
             <div className="flex flex-wrap items-center gap-3">

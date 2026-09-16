@@ -92,9 +92,9 @@ export default async function RootLayout({
         <QueryProvider>
           <Analytics />
           <SpeedInsights />
-          <div className="flex min-h-screen flex-col pt-6 sm:pt-10">
+          <div className="flex min-h-screen flex-col pt-6 sm:pt-[60px]">
             <Header lang={lang} />
-            <main className="mx-auto w-full max-w-[720px] flex-1 px-6">
+            <main className="mx-auto w-full max-w-[768px] flex-1 px-6">
               {children}
             </main>
             <Footer lang={lang} />

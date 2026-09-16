@@ -9,7 +9,7 @@ export default function Activities({ lang }: { lang: Locale }) {
 
   return (
     <section id="activities" className="flex w-full flex-col gap-8">
-      <h2 className="text-xl font-bold tracking-tight">
+      <h2 className="text-xl leading-none font-bold">
         {dict.sections.activities}
       </h2>
       <div className="flex flex-col gap-10">

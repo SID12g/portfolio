@@ -12,7 +12,7 @@ export default function Contributions({ lang }: { lang: Locale }) {
 
   return (
     <section id="contributions" className="flex w-full flex-col gap-8">
-      <h2 className="text-xl font-bold tracking-tight">
+      <h2 className="text-xl leading-none font-bold">
         {dict.sections.contributions}
       </h2>
       <div className="flex flex-col gap-10">
@@ -36,7 +36,7 @@ function ContributionItemView({ item }: { item: ContributionItem }) {
             href={item.repositoryHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-base font-medium tracking-tight hover:underline"
+            className="text-base leading-none font-medium hover:underline"
           >
             {item.repository}
           </Link>
@@ -44,13 +44,13 @@ function ContributionItemView({ item }: { item: ContributionItem }) {
             href={item.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-muted hover:underline"
+            className="text-sm leading-none text-muted hover:underline"
           >
             {item.title}
           </Link>
         </div>
       </div>
-      <span className="shrink-0 text-sm whitespace-nowrap text-muted">
+      <span className="shrink-0 text-sm leading-none whitespace-nowrap text-muted">
         {item.date}
       </span>
     </div>

@@ -6,10 +6,10 @@ import { localizePath, type Locale } from "@/i18n/config";
 export default function Footer({ lang }: { lang: Locale }) {
   const year = new Date().getFullYear();
   return (
-    <footer className="mx-auto flex w-full max-w-[720px] flex-col gap-10 px-6 pt-11 pb-6">
+    <footer className="mx-auto flex w-full max-w-[768px] flex-col gap-10 px-6 pt-11 pb-6">
       <Divider />
       <div className="flex flex-row flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-muted">
+        <p className="text-sm leading-none text-muted">
           © {year}{" "}
           <Link
             href={localizePath(lang, "/")}

@@ -13,7 +13,7 @@
   --color-black: #000000;
 
   --color-nav-inactive: rgba(0, 0, 0, 0.5);
-  --color-divider: rgba(0, 0, 0, 0.2);
+  --color-divider: #d3d3d3;
   --color-surface-border: #e5e5e5;
   --color-invert-bg: #000000;
   --color-invert-fg: #ffffff;
@@ -70,6 +70,7 @@ html {
   font-family:
     var(--font-pretendard), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  letter-spacing: -0.01em;
 }
 
 ::selection {
