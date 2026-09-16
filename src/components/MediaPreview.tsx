@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowUpRight16Icon, FileIcon } from "@/components/icons";
-import type { AssetType } from "@/utils/projects";
+import type { AssetType } from "@/utils/media";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 

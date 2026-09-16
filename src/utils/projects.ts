@@ -2,17 +2,13 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { Locale } from "@/i18n/config";
-
-export type AssetType = "image" | "video" | "pdf" | "link" | "other";
+import { getAssetType, type AssetType } from "@/utils/media";
 
 export interface ProjectAsset {
   name: string;
   url: string;
   type: AssetType;
 }
-
-const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"]);
-const VIDEO_EXTS = new Set([".mp4", ".webm", ".mov", ".avi"]);
 
 export function getProjectAssets(slug: string): ProjectAsset[] {
   const assetsDir = path.join(process.cwd(), "public", "projects", slug, "assets");
@@ -33,14 +29,13 @@ export function getProjectAssets(slug: string): ProjectAsset[] {
         return [];
       }
 
-      const type: AssetType = IMAGE_EXTS.has(ext)
-        ? "image"
-        : VIDEO_EXTS.has(ext)
-          ? "video"
-          : ext === ".pdf"
-            ? "pdf"
-            : "other";
-      return [{ name: file, url: `/projects/${slug}/assets/${file}`, type }];
+      return [
+        {
+          name: file,
+          url: `/projects/${slug}/assets/${file}`,
+          type: getAssetType(file),
+        },
+      ];
     });
 }
 

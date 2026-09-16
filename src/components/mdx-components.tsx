@@ -1,21 +1,10 @@
 import React from "react";
 import { MediaGallery } from "./MediaPreview";
-import type { AssetType } from "@/utils/projects";
 import type { Locale } from "@/i18n/config";
-
-const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"]);
-const VIDEO_EXTS = new Set([".mp4", ".webm", ".mov", ".avi"]);
-
-function inferType(src: string): AssetType {
-  const ext = src.split(".").pop()?.toLowerCase() ?? "";
-  if (IMAGE_EXTS.has(`.${ext}`)) return "image";
-  if (VIDEO_EXTS.has(`.${ext}`)) return "video";
-  if (ext === "pdf") return "pdf";
-  return "other";
-}
+import { getAssetType } from "@/utils/media";
 
 function toGalleryItem(src: string) {
-  return { src, name: src.split("/").pop() ?? src, type: inferType(src) };
+  return { src, name: src.split("/").pop() ?? src, type: getAssetType(src) };
 }
 
 function CustomParagraph({
