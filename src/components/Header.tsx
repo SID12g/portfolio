@@ -38,10 +38,10 @@ export default function Header({ lang }: { lang: Locale }) {
 
         <Link
           href="mailto:i@sid12g.dev"
-          className="flex shrink-0 items-center gap-2 rounded-full border border-invert-bg bg-invert-bg px-3 py-2.5 text-sm leading-none font-medium whitespace-nowrap text-invert-fg"
+          className="group flex shrink-0 items-center gap-2 rounded-full border border-invert-bg bg-invert-bg px-3 py-2.5 text-sm leading-none font-medium whitespace-nowrap text-invert-fg transition-colors duration-150 hover:border-invert-hover hover:bg-invert-hover"
         >
           {dict.nav.contact}
-          <ArrowUpRightIcon className="size-3.5" />
+          <ArrowUpRightIcon className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </nav>
     </header>

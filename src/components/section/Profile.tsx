@@ -19,7 +19,7 @@ export default function Profile({ lang }: { lang: Locale }) {
       <div className="flex flex-wrap items-start gap-4">
         <Link
           href={localizePath(lang, "/projects")}
-          className="flex items-center justify-center rounded-full border border-invert-bg bg-invert-bg px-5 py-3.5 text-sm leading-none font-medium text-invert-fg"
+          className="flex items-center justify-center rounded-full border border-invert-bg bg-invert-bg px-5 py-3.5 text-sm leading-none font-medium text-invert-fg transition-colors duration-150 hover:border-invert-hover hover:bg-invert-hover"
         >
           {dict.viewProjects}
         </Link>
@@ -27,10 +27,10 @@ export default function Profile({ lang }: { lang: Locale }) {
           href="https://blog.sid12g.dev"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-full border border-faint bg-background px-5 py-3.5 text-sm leading-none font-medium"
+          className="group flex items-center justify-center gap-2 rounded-full border border-faint bg-background px-5 py-3.5 text-sm leading-none font-medium transition-colors duration-150 hover:bg-muted-15"
         >
           {dict.goToBlog}
-          <ArrowUpRightIcon className="size-3.5" />
+          <ArrowUpRightIcon className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </div>
     </div>

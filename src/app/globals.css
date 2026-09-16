@@ -12,6 +12,7 @@
   --color-divider: #d3d3d3;
   --color-surface-border: #e5e5e5;
   --color-invert-bg: #000000;
+  --color-invert-hover: #333333;
   --color-invert-fg: #ffffff;
   color-scheme: light;
 }
@@ -29,6 +30,7 @@
     --color-divider: #2f2f2f;
     --color-surface-border: #2a2a2a;
     --color-invert-bg: #f2f2f2;
+    --color-invert-hover: #d4d4d4;
     --color-invert-fg: #0d0d0d;
     color-scheme: dark;
   }
@@ -46,6 +48,7 @@
   --color-divider: var(--color-divider);
   --color-surface-border: var(--color-surface-border);
   --color-invert-bg: var(--color-invert-bg);
+  --color-invert-hover: var(--color-invert-hover);
   --color-invert-fg: var(--color-invert-fg);
 
   --font-pretendard: var(--font-pretendard);

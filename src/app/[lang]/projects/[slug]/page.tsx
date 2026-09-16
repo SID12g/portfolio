@@ -105,7 +105,7 @@ export default async function ProjectPage({
               href={meta.source}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex shrink-0 items-center gap-2 rounded-full border border-surface-border bg-background px-3.5 py-2 text-sm font-medium text-muted transition-colors duration-150 hover:text-primary"
+              className="flex shrink-0 items-center gap-2 rounded-full border border-surface-border bg-background px-3.5 py-2 text-sm font-medium text-muted transition-colors duration-150 hover:bg-muted-15 hover:text-primary"
             >
               <CodeIcon className="size-3.5" />
               Source
