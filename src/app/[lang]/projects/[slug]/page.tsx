@@ -56,16 +56,13 @@ export default async function ProjectPage({
 
   return (
     <div className="flex flex-col gap-11">
-      <div className="flex flex-col gap-6">
-        <Link
-          href={localizePath(lang, "/projects")}
-          className="-my-2 flex w-fit items-center gap-2 py-2 pr-2 text-sm leading-none font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
-        >
-          <ArrowLeftIcon className="size-3.5" />
-          {dict.title}
-        </Link>
-        <h1 className="text-[40px] leading-none font-bold">{dict.title}</h1>
-      </div>
+      <Link
+        href={localizePath(lang, "/projects")}
+        className="-my-2 flex w-fit items-center gap-2 py-2 pr-2 text-sm leading-none font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
+      >
+        <ArrowLeftIcon className="size-3.5" />
+        {dict.title}
+      </Link>
 
       <div className="aspect-video w-full overflow-hidden rounded-2xl border border-surface-border">
         <Image
@@ -92,9 +89,9 @@ export default async function ProjectPage({
               />
             </div>
             <div className="flex min-w-0 flex-col gap-2">
-              <h2 className="text-[32px] leading-none font-semibold">
+              <h1 className="text-[32px] leading-none font-semibold">
                 {meta.title}
-              </h2>
+              </h1>
               <p className="text-base leading-[1.4] font-medium text-muted">
                 {meta.description}
               </p>
