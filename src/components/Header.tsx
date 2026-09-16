@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeaderNav from "@/components/HeaderNav";
 import { ArrowUpRightIcon } from "@/components/icons";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -27,21 +28,13 @@ export default function Header({ lang }: { lang: Locale }) {
           sid12g.dev
         </Link>
 
-        <div className="-mx-2.5 hidden items-center text-sm leading-none whitespace-nowrap md:flex">
-          {sectionIds.map((id, index) => (
-            <Link
-              key={id}
-              href={`${home}#${id}`}
-              className={`px-2.5 py-2.5 ${
-                index === 0
-                  ? "font-semibold text-primary"
-                  : "font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
-              }`}
-            >
-              {dict.sections[id]}
-            </Link>
-          ))}
-        </div>
+        <HeaderNav
+          home={home}
+          sections={sectionIds.map((id) => ({
+            id,
+            label: dict.sections[id],
+          }))}
+        />
 
         <Link
           href="mailto:i@sid12g.dev"
