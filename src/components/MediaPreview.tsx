@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowUpRightIcon, FileIcon } from "@/components/icons";
+import { ArrowUpRight16Icon, FileIcon } from "@/components/icons";
 import type { AssetType } from "@/utils/projects";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -114,7 +114,7 @@ function DocumentTile({
         ) : (
           <LinkIcon />
         )}
-        <ArrowUpRightIcon className="size-4 transition-colors duration-150 group-hover:text-primary" />
+        <ArrowUpRight16Icon className="size-4 transition-colors duration-150 group-hover:text-primary" />
       </span>
       <span className="flex min-w-0 flex-col gap-1.5">
         <span className="line-clamp-2 text-sm leading-[1.4] font-semibold break-all text-primary">

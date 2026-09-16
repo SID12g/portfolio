@@ -67,6 +67,16 @@ html {
   color: var(--color-invert-fg);
 }
 
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: currentColor;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+}
+
 .prose-custom {
   font-size: 1rem;
   font-weight: 500;
