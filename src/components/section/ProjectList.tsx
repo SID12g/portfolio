@@ -2,9 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { ArrowUpRightIcon } from "@/components/icons";
 import { localizePath, type Locale } from "@/i18n/config";
+
+const featuredTags = [
+  "Next.js",
+  "React Native",
+  "Expo",
+  "Tailwind CSS",
+  "TanStack Query",
+  "Vite",
+] as const;
 
 export interface ProjectListItem {
   slug: string;
@@ -23,17 +32,13 @@ export default function ProjectList({
   projects: ProjectListItem[];
   allLabel: string;
 }) {
-  const tags = useMemo(() => {
-    const seen = new Set<string>();
-    projects.forEach((project) =>
-      project.stacks.forEach((stack) => seen.add(stack)),
-    );
-    return Array.from(seen);
-  }, [projects]);
-
   const [active, setActive] = useState<string | null>(null);
   const filtered = active
-    ? projects.filter((project) => project.stacks.includes(active))
+    ? projects.filter((project) =>
+        project.stacks.some(
+          (stack) => stack.toLocaleLowerCase() === active.toLocaleLowerCase(),
+        ),
+      )
     : projects;
 
   return (
@@ -44,7 +49,7 @@ export default function ProjectList({
           active={active === null}
           onClick={() => setActive(null)}
         />
-        {tags.map((tag) => (
+        {featuredTags.map((tag) => (
           <FilterTag
             key={tag}
             label={tag}
@@ -70,9 +75,9 @@ export default function ProjectList({
                   className="size-full object-cover"
                 />
               </div>
-              <div className="flex min-w-0 flex-col gap-2">
-                <div className="flex flex-col gap-1">
-                  <p className="text-base font-semibold tracking-tight">
+              <div className="flex min-w-0 flex-col gap-5">
+                <div className="flex flex-col gap-2">
+                  <p className="text-base font-semibold">
                     {project.title}
                   </p>
                   <p className="text-sm text-muted">{project.description}</p>
