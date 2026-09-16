@@ -127,12 +127,13 @@ export default async function ProjectPage({
         {stacks.length > 0 && (
           <div className="flex flex-wrap gap-3">
             {stacks.map((stack) => (
-              <span
+              <Link
                 key={stack}
-                className="rounded-full bg-muted-15 px-3.5 py-2 text-sm font-medium"
+                href={`${localizePath(lang, "/projects")}?tag=${encodeURIComponent(stack)}`}
+                className="rounded-full bg-muted-15 px-3.5 py-2 text-sm font-medium transition-colors duration-150 hover:bg-surface-border"
               >
                 {stack}
-              </span>
+              </Link>
             ))}
           </div>
         )}
