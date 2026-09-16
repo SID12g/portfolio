@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import Divider from "@/components/Divider";
 import { ArrowLeftIcon } from "@/components/icons";
-import ProjectList from "@/components/section/ProjectList";
+import ProjectList, {
+  ProjectListFallback,
+} from "@/components/section/ProjectList";
 import { getProjects } from "@/utils/projects";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -33,6 +36,7 @@ export default async function ProjectsPage({
     preview: project.meta.preview,
     stacks: project.meta.stacks.split(",").map((stack) => stack.trim()),
   }));
+  const listProps = { lang, projects, allLabel: dict.all };
 
   return (
     <div className="flex flex-col gap-11">
@@ -49,7 +53,9 @@ export default async function ProjectsPage({
         </h1>
       </div>
       <Divider />
-      <ProjectList lang={lang} projects={projects} allLabel={dict.all} />
+      <Suspense fallback={<ProjectListFallback {...listProps} />}>
+        <ProjectList {...listProps} />
+      </Suspense>
     </div>
   );
 }
