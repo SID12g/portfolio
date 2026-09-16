@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import QueryProvider from "@/components/providers/QueryProvider";
 import { locales, type Locale } from "@/i18n/config";
 import { Analytics } from "@vercel/analytics/next";
@@ -87,12 +88,17 @@ export default async function RootLayout({
       lang={lang}
       className={`${pretendard.variable} ${jetBrainsMono.variable} antialiased`}
     >
-      <body className="max-w-[640px] mx-auto px-6 py-10">
+      <body>
         <QueryProvider>
           <Analytics />
           <SpeedInsights />
-          <div>{children}</div>
-          <Footer lang={lang} />
+          <div className="flex min-h-screen flex-col pt-6 sm:pt-10">
+            <Header lang={lang} />
+            <main className="mx-auto w-full max-w-[720px] flex-1 px-6">
+              {children}
+            </main>
+            <Footer lang={lang} />
+          </div>
         </QueryProvider>
       </body>
 

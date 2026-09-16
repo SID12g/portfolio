@@ -1,19 +1,23 @@
-import Separator from "@/components/Separator";
+import Image from "next/image";
+import MetaRow from "@/components/MetaRow";
 import { education, type EducationItem } from "@/data/education";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
-import Link from "next/link";
 
 export default function Education({ lang }: { lang: Locale }) {
+  const dict = getDictionary(lang);
+
   return (
-    <div>
-      <Separator title="EDUCATION" />
-      <div className="flex flex-col gap-5">
+    <section id="education" className="flex w-full flex-col gap-8">
+      <h2 className="text-xl font-bold tracking-tight">
+        {dict.sections.education}
+      </h2>
+      <div className="flex flex-col gap-10">
         {education.map((item) => (
           <EducationItemView key={item.school.en} item={item} lang={lang} />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -25,30 +29,24 @@ function EducationItemView({
   lang: Locale;
 }) {
   const dict = getDictionary(lang).education;
+
   return (
-    <div className="flex flex-col gap-1">
-      <div className="w-full flex flex-row justify-between items-center">
-        <Link
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium hover:text-accent transition-colors duration-150 text-sm sm:text-base"
-        >
-          {item.school[lang]}
-        </Link>
-        <span className="font-jetbrains-mono text-muted text-xs sm:text-sm whitespace-nowrap">
-          {item.period}
-          {item.current && (
-            <span className="text-accent text-xs sm:text-sm">
-              {" "}
-              {dict.current}
-            </span>
-          )}
-        </span>
-      </div>
-      <span className="font-medium text-muted text-sm sm:text-base">
-        {item.major[lang]}
-      </span>
-    </div>
+    <MetaRow
+      icon={
+        <Image
+          src={item.icon}
+          alt=""
+          width={40}
+          height={40}
+          className="size-10 shrink-0"
+        />
+      }
+      href={item.href}
+      title={item.school[lang]}
+      subtitle={item.major[lang]}
+      trailing={
+        item.period + (item.current ? ` - ${dict.current}` : "")
+      }
+    />
   );
 }

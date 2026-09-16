@@ -1,13 +1,12 @@
 import Activities from "@/components/section/Activities";
 import Certifications from "@/components/section/Certifications";
 import Contributions from "@/components/section/Contributions";
+import Divider from "@/components/Divider";
 import Education from "@/components/section/Education";
 import Info from "@/components/section/Info";
 import Intro from "@/components/section/Intro";
-import PostsLoader from "@/components/PostsLoader";
 import Profile from "@/components/section/Profile";
 import Stack from "@/components/section/Stacks";
-import Projects from "@/components/section/Projects";
 import type { Locale } from "@/i18n/config";
 
 export default async function Home({
@@ -18,16 +17,21 @@ export default async function Home({
   const lang = (await params).lang as Locale;
 
   return (
-    <div className="flex flex-col gap-15">
+    <div className="flex flex-col gap-11">
       <Profile lang={lang} />
+      <Divider />
       <Intro lang={lang} />
+      <Divider />
       <Education lang={lang} />
+      <Divider />
       <Activities lang={lang} />
-      <Stack />
+      <Divider />
       <Certifications lang={lang} />
-      <Projects lang={lang} />
-      <PostsLoader lang={lang} />
-      <Contributions />
+      <Divider />
+      <Stack lang={lang} />
+      <Divider />
+      <Contributions lang={lang} />
+      <Divider />
       <Info lang={lang} />
     </div>
   );

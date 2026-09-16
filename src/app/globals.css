@@ -1,30 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --color-background: #f7f7f4;
-  --color-muted: #807d72;
-  --color-primary: #26251e;
-  --color-faint: #e6e5e0;
+  --color-background: #ffffff;
+  --color-muted: rgba(0, 0, 0, 0.6);
+  --color-primary: #000000;
+  --color-faint: rgba(0, 0, 0, 0.08);
   --color-accent: #f54e00;
-  --color-muted-15: #e6e5e0;
-  --color-muted-5: #ffffff;
-  --color-white-10: rgba(38, 37, 30, 0.12);
-  --color-hover: rgba(38, 37, 30, 0.04);
+  --color-muted-15: rgba(0, 0, 0, 0.06);
+  --color-muted-5: #f7f7f7;
+  --color-white-10: rgba(0, 0, 0, 0.1);
+  --color-hover: rgba(0, 0, 0, 0.04);
   --color-black: #000000;
+
+  --color-nav-inactive: rgba(0, 0, 0, 0.5);
+  --color-divider: rgba(0, 0, 0, 0.2);
+  --color-surface-border: #e5e5e5;
+  --color-invert-bg: #000000;
+  --color-invert-fg: #ffffff;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #111111;
-    --color-muted: #7d7d7d;
-    --color-primary: #d8d8d8;
-    --color-faint: #323232;
+    --color-background: #0d0d0d;
+    --color-muted: rgba(255, 255, 255, 0.6);
+    --color-primary: #f2f2f2;
+    --color-faint: rgba(255, 255, 255, 0.1);
     --color-accent: #3a8ae0;
-    --color-muted-15: rgba(125, 125, 125, 0.15);
-    --color-muted-5: rgba(125, 125, 125, 0.05);
+    --color-muted-15: rgba(255, 255, 255, 0.08);
+    --color-muted-5: #171717;
     --color-white-10: rgba(255, 255, 255, 0.1);
-    --color-hover: rgba(255, 255, 255, 0.1);
+    --color-hover: rgba(255, 255, 255, 0.06);
+
+    --color-nav-inactive: rgba(255, 255, 255, 0.5);
+    --color-divider: rgba(255, 255, 255, 0.14);
+    --color-surface-border: rgba(255, 255, 255, 0.12);
+    --color-invert-bg: #f2f2f2;
+    --color-invert-fg: #0d0d0d;
     color-scheme: dark;
   }
 }
@@ -41,6 +53,12 @@
   --color-hover: var(--color-hover);
   --color-black: var(--color-black);
 
+  --color-nav-inactive: var(--color-nav-inactive);
+  --color-divider: var(--color-divider);
+  --color-surface-border: var(--color-surface-border);
+  --color-invert-bg: var(--color-invert-bg);
+  --color-invert-fg: var(--color-invert-fg);
+
   --font-pretendard: var(--font-pretendard);
   --font-jetbrains-mono: var(--font-jetbrains-mono);
 }
@@ -48,6 +66,7 @@
 html {
   background: var(--color-background);
   color: var(--color-primary);
+  scroll-padding-top: 96px;
   font-family:
     var(--font-pretendard), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

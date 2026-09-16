@@ -1,9 +1,33 @@
 import type { Locale } from "./config";
 
+export interface IntroSegment {
+  text: string;
+  bold?: boolean;
+  href?: string;
+}
+
 export const dictionaries = {
   ko: {
     common: {
       more: "더보기 →",
+    },
+    nav: {
+      contact: "연락하기",
+    },
+    sections: {
+      intro: "인트로",
+      education: "학력",
+      activities: "활동",
+      certifications: "자격증",
+      stack: "스택",
+      contributions: "기여",
+      links: "링크",
+    },
+    profile: {
+      name: "조성민",
+      role: "Frontend Developer",
+      viewProjects: "프로젝트 보기",
+      goToBlog: "블로그로 이동",
     },
     education: {
       current: "재학 중",
@@ -13,16 +37,67 @@ export const dictionaries = {
     },
     intro: {
       paragraphs: [
-        "저는 한국디지털미디어고등학교 웹프로그래밍과를 졸업하고 서울시립대학교 통계학과에서 학업과 개발을 병행하며 꾸준히 성장하고 있는 주니어 개발자입니다.",
-        "개발과 경제 · 금융 분야에 큰 관심을 가지고 있어 해당 분야와 관련된 책과 기사를 많이 접하며, 주변 분들과 이야기를 나누는 것을 좋아합니다. 최근에는 투자 및 자산관리에 대해 관심을 가지고 있어, 많은 분들께 제가 가지고 있는 경제 · 금융 분야에 대한 접근법에 대해 이야기하며, 생각을 넓혀나가고 있습니다.",
-        "개발 프레임워크로는 Next.js와 React Native를 자주 사용합니다. 고등학생 시절 웹프로그래밍을 처음 접하며 전문적인 전공 수업을 통해 React를 익혔고, 더 나아가 Next.js와 React Native도 학습하였습니다. 프론트엔드 뿐 아니라 개발 및 IT 전반에 관심을 가지고 있으며, Nest.js와 Spring Boot 등 백엔드 프레임워크에도 관심을 가지고 있습니다.",
-        "고등학생 시절부터 여러 프로젝트를 진행하며 협업 능력을 길러왔습니다. 프로덕트에 대해 개발 뿐 아니라 기획, 디자인 등 전반에 대해 다루어왔고, 덕분에 프로덕트를 바라볼 때 더욱 성숙한 시선으로 바라볼 수 있게 되었습니다.",
-      ],
-      figma:
-        "특히 Figma를 통한 UI/UX 디자인에 큰 관심을 가지고 있으며, 개발자로서 좋은 UX를 위한 디자인을 이해하고 실행할 수 있어야 한다고 생각하여 Figma 또한 고등학생 당시부터 학습해 왔으며, 대학교에서도 웹디자인 수업을 수강하며 이러한 시각을 더욱 넓혀가고 있습니다. 고등학생 때 피그마를 사용하여 책을 만든 경험도 가지고 있습니다.",
-      learnMore: "(자세히 보기)",
-      closing:
-        "그리고 현재, 통계학과에 재학하며 통계학을 학습하며, 개발과 통계학이 어떻게 잘 조화를 이룰 수 있을지 고민하고, 새로운 학습을 바탕으로 새로운 프로덕트를 개발해나가고 있습니다.",
+        [
+          { text: "안녕하세요, " },
+          { text: "프론트엔드 개발자 " },
+          { text: "조성민", bold: true },
+          { text: "입니다." },
+        ],
+        [
+          {
+            text: "고등학생 때부터 웹 개발에 관심을 가지며 배우기 시작했고, 현재는 ",
+          },
+          { text: "React", bold: true },
+          { text: "와 " },
+          { text: "Next.js", bold: true },
+          {
+            text: " 등의 웹 개발 프레임워크를 중심으로 프로덕트를 개발하고 있습니다. ",
+          },
+          { text: "React Native", bold: true },
+          { text: ", " },
+          { text: "Expo", bold: true },
+          { text: " 등 앱 기술에도 관심을 가지고 있습니다." },
+        ],
+        [
+          {
+            text: "한국디지털미디어고등학교 웹프로그래밍과를 졸업해 현재 서울시립대학교 자연과학대학 통계학과에 재학 중이고, 통계학을 학습하며 앞으로 만들어갈 프로덕트를 위해 데이터를 읽고 해석하는 관점을 쌓아가고 있습니다. ",
+          },
+          { text: "개발과 통계학이 만나는 지점", bold: true },
+          { text: "에서 무엇을 만들 수 있을지 계속 고민하고 있습니다." },
+        ],
+        [
+          {
+            text: "화면을 만드는 일은 결국 사용자의 경험을 설계하는 일",
+            bold: true,
+          },
+          {
+            text: "이라고 생각합니다. 그래서 고등학생 때부터 Figma를 학습하며 디자인을 함께 익혔고, 그 시각을 넓혀가고 있습니다. ",
+          },
+          {
+            text: "Figma로 책을 만들어 본 경험",
+            bold: true,
+            href: "https://blog.sid12g.dev/figma-book",
+          },
+          { text: "도 있습니다." },
+        ],
+        [
+          { text: "동시에 " },
+          {
+            text: "좋은 경험은 보이는 것만으로 완성되지 않는다고 생각",
+            bold: true,
+          },
+          {
+            text: "합니다. 아무리 잘 설계된 화면이라도 첫 화면이 늦게 뜨거나 입력에 반응이 느리면 사용자는 그 설계를 경험하기 전에 떠납니다. 그래서 렌더링 방식과 번들 크기, 불필요한 리렌더를 함께 신경 쓰며, 측정할 수 있는 지표로 개선을 확인하려 합니다.",
+          },
+        ],
+        [
+          {
+            text: "여러 프로젝트에서 개발뿐 아니라 기획과 디자인까지 함께 맡아왔습니다. 덕분에 ",
+          },
+          { text: "프로덕트를 한쪽 면이 아니라 전체로 바라보는 시선", bold: true },
+          { text: "을 갖게 되었습니다." },
+        ],
+      ] satisfies IntroSegment[][],
     },
     notFound: {
       label: "404 Not Found",
@@ -44,14 +119,38 @@ export const dictionaries = {
     },
     projectsPage: {
       metaDescription: "sid12g의 프로젝트 목록입니다.",
+      breadcrumb: "포트폴리오",
+      title: "프로젝트",
+      all: "전체",
     },
     posts: {
       loadError: "포스트를 불러오는데 실패했습니다.",
+    },
+    footer: {
+      languageName: "한국어",
     },
   },
   en: {
     common: {
       more: "More →",
+    },
+    nav: {
+      contact: "Contact",
+    },
+    sections: {
+      intro: "Intro",
+      education: "Education",
+      activities: "Activities",
+      certifications: "Certifications",
+      stack: "Stack",
+      contributions: "Contributions",
+      links: "Links",
+    },
+    profile: {
+      name: "Sungmin Cho",
+      role: "Frontend Developer",
+      viewProjects: "View Projects",
+      goToBlog: "Go to Blog",
     },
     education: {
       current: "Enrolled",
@@ -61,16 +160,67 @@ export const dictionaries = {
     },
     intro: {
       paragraphs: [
-        "I'm a junior developer who majored in web programming at Korea Digital Media High School. I’m now pursuing my ongoing interests in development projects along with my studies in Statistics at the University of Seoul.",
-        "I have been dedicated to economics and finance as well, as I get to read books and articles regarding these topics and discuss them with colleagues. Lately I've been interested in investment and asset management. Sharing my perspective on those fields with others has let me effectively deepen my thinking.",
-        "I frequently utilize Next.js and React Native. My first encounter with web development was in high school, where I learned React through specialized coursework and acquired skills in Next.js and React Native as well. Beyond just frontend fields, I'm pursuing my passion for development and IT as a whole, including backend frameworks like Nest.js and Spring Boot.",
-        "Since high school, I've worked on multiple projects and built up my collaboration skills. I've handled not just development but also planning, design, and other aspects of building products, which has provided a more mature perspective when looking at a product as a whole.",
-      ],
-      figma:
-        "When it comes to fields of design, I'm especially interested in UI/UX design with Figma. As I believe that developers should be able to understand and execute their own design for good UX, I've been learning Figma myself since high school, and I’m continuing to expand my viewpoint by taking web design courses in university. One of my significant experiences here was making a book using Figma back in high school. ",
-      learnMore: "(Learn more)",
-      closing:
-        "Right now, majoring in Statistics, I'm studying it while constantly wondering how my development work could evolve when combined with it. Building new products based on what I learn is what drives me.",
+        [
+          { text: "Hello, I'm " },
+          { text: "Sungmin Cho", bold: true },
+          { text: ", a frontend developer." },
+        ],
+        [
+          {
+            text: "I first got interested in web development in high school, and I now build products mainly with ",
+          },
+          { text: "React", bold: true },
+          { text: " and " },
+          { text: "Next.js", bold: true },
+          { text: ". I'm also interested in app development with " },
+          { text: "React Native", bold: true },
+          { text: " and " },
+          { text: "Expo", bold: true },
+          { text: "." },
+        ],
+        [
+          {
+            text: "I graduated from the Web Programming department at Korea Digital Media High School and am currently studying Statistics in the College of Natural Sciences at the University of Seoul, building a perspective for reading and interpreting data that I can bring to future products. I keep exploring what can be built at ",
+          },
+          { text: "the intersection of development and statistics", bold: true },
+          { text: "." },
+        ],
+        [
+          {
+            text: "Building a screen is ultimately about designing a user's experience",
+            bold: true,
+          },
+          {
+            text: ", I believe. That's why I've studied Figma alongside development since high school, and I keep broadening that perspective. I even ",
+          },
+          {
+            text: "made a book using Figma",
+            bold: true,
+            href: "https://blog.sid12g.dev/figma-book",
+          },
+          { text: "." },
+        ],
+        [
+          { text: "At the same time, I don't think " },
+          {
+            text: "a good experience is complete just because it looks good",
+            bold: true,
+          },
+          {
+            text: ". However well a screen is designed, if the first paint is slow or input feels laggy, users leave before they ever experience that design. So I pay close attention to rendering strategy, bundle size, and unnecessary re-renders, and confirm improvements with measurable metrics.",
+          },
+        ],
+        [
+          {
+            text: "Across many projects I've handled not only development but also planning and design. That's given me ",
+          },
+          {
+            text: "a perspective that looks at a product as a whole, not just one side of it",
+            bold: true,
+          },
+          { text: "." },
+        ],
+      ] satisfies IntroSegment[][],
     },
     notFound: {
       label: "404 Not Found",
@@ -93,9 +243,15 @@ export const dictionaries = {
     },
     projectsPage: {
       metaDescription: "A list of sid12g's projects.",
+      breadcrumb: "Portfolio",
+      title: "Projects",
+      all: "All",
     },
     posts: {
       loadError: "Failed to load posts.",
+    },
+    footer: {
+      languageName: "English",
     },
   },
 } satisfies Record<Locale, unknown>;

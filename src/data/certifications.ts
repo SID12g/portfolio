@@ -4,6 +4,7 @@ export interface CertificationItem {
   name: Record<Locale, string>;
   issuer: Record<Locale, string>;
   href: string;
+  icon: string;
   date: string;
 }
 
@@ -15,6 +16,7 @@ export const certifications: CertificationItem[] = [
       en: "Korea Communication Agency",
     },
     href: "https://www.kca.kr",
+    icon: "/images/logos/kca.svg",
     date: "2026.09",
   },
   {
@@ -24,6 +26,7 @@ export const certifications: CertificationItem[] = [
       en: "Human Resources Development Service of Korea",
     },
     href: "https://www.hrdkorea.or.kr",
+    icon: "/images/logos/hrdk.png",
     date: "2026.04",
   },
   {
@@ -33,6 +36,7 @@ export const certifications: CertificationItem[] = [
       en: "Korea Association for AI & ICT Promotion",
     },
     href: "https://www.kait.or.kr",
+    icon: "/images/logos/kait.png",
     date: "2023.10",
   },
 ];

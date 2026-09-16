@@ -1,18 +1,26 @@
-import Separator from "@/components/Separator";
-import { certifications, type CertificationItem } from "@/data/certifications";
+import Image from "next/image";
+import MetaRow from "@/components/MetaRow";
+import {
+  certifications,
+  type CertificationItem,
+} from "@/data/certifications";
 import type { Locale } from "@/i18n/config";
-import Link from "next/link";
+import { getDictionary } from "@/i18n/dictionaries";
 
 export default function Certifications({ lang }: { lang: Locale }) {
+  const dict = getDictionary(lang);
+
   return (
-    <div>
-      <Separator title="CERTIFICATIONS" />
-      <div className="flex flex-col gap-5">
+    <section id="certifications" className="flex w-full flex-col gap-8">
+      <h2 className="text-xl font-bold tracking-tight">
+        {dict.sections.certifications}
+      </h2>
+      <div className="flex flex-col gap-10">
         {certifications.map((item) => (
           <CertificationItemView key={item.name.en} item={item} lang={lang} />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -24,23 +32,20 @@ function CertificationItemView({
   lang: Locale;
 }) {
   return (
-    <div className="flex flex-col gap-1">
-      <div className="w-full flex flex-row justify-between items-center">
-        <span className="font-medium text-sm sm:text-base">
-          {item.name[lang]}
-        </span>
-        <span className="font-jetbrains-mono text-muted text-xs sm:text-sm whitespace-nowrap">
-          {item.date}
-        </span>
-      </div>
-      <Link
-        href={item.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-medium text-muted hover:text-accent transition-colors duration-150 text-sm sm:text-base "
-      >
-        {item.issuer[lang]}
-      </Link>
-    </div>
+    <MetaRow
+      icon={
+        <Image
+          src={item.icon}
+          alt=""
+          width={40}
+          height={40}
+          className="size-10 shrink-0 object-contain"
+        />
+      }
+      href={item.href}
+      title={item.name[lang]}
+      subtitle={item.issuer[lang]}
+      trailing={item.date}
+    />
   );
 }

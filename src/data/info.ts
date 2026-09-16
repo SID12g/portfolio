@@ -1,4 +1,7 @@
+export type InfoIcon = "linkedin" | "github" | "resume" | "email";
+
 export interface InfoItem {
+  icon: InfoIcon;
   label: string;
   content: string;
   href: string;
@@ -6,38 +9,27 @@ export interface InfoItem {
 
 export const info: InfoItem[] = [
   {
-    label: "BLOG",
-    content: "blog.sid12g.dev",
-    href: "https://blog.sid12g.dev",
-  },
-  {
-    label: "EMAIL",
-    content: "i@sid12g.dev",
-    href: "mailto:i@sid12g.dev",
-  },
-  {
-    label: "GITHUB",
-    content: "@SID12g",
-    href: "https://github.com/SID12g",
-  },
-  {
-    label: "LINKEDIN",
+    icon: "linkedin",
+    label: "LinkedIn",
     content: "linkedin.com/in/sid12g",
     href: "https://linkedin.com/in/sid12g",
   },
   {
-    label: "ROCKET",
-    content: "rocketpunch.com/@sid12g",
-    href: "https://rocketpunch.com/@sid12g",
+    icon: "github",
+    label: "GitHub",
+    content: "github.com/SID12g",
+    href: "https://github.com/SID12g",
   },
   {
-    label: "PORTFOLIO",
-    content: "porfolio.pdf",
-    href: "/portfolio",
-  },
-  {
-    label: "RESUME",
-    content: "resume.pdf",
+    icon: "resume",
+    label: "Resume",
+    content: "sid12g.dev/resume",
     href: "/resume",
+  },
+  {
+    icon: "email",
+    label: "Email",
+    content: "i@sid12g.dev",
+    href: "mailto:i@sid12g.dev",
   },
 ];

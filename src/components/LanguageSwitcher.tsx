@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { GlobeIcon } from "@/components/icons";
 import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 function switchPath(pathname: string, target: Locale): string {
   const isEn = pathname === "/en" || pathname.startsWith("/en/");
@@ -13,30 +15,15 @@ function switchPath(pathname: string, target: Locale): string {
 
 export default function LanguageSwitcher({ lang }: { lang: Locale }) {
   const pathname = usePathname();
+  const target: Locale = lang === "ko" ? "en" : "ko";
 
   return (
-    <div className="flex flex-row items-center gap-1.5 font-jetbrains-mono text-xs sm:text-sm">
-      <Link
-        href={switchPath(pathname, "ko")}
-        className={
-          lang === "ko"
-            ? "text-primary"
-            : "text-muted hover:text-accent transition-colors duration-150"
-        }
-      >
-        KO
-      </Link>
-      <span className="text-muted">/</span>
-      <Link
-        href={switchPath(pathname, "en")}
-        className={
-          lang === "en"
-            ? "text-primary"
-            : "text-muted hover:text-accent transition-colors duration-150"
-        }
-      >
-        EN
-      </Link>
-    </div>
+    <Link
+      href={switchPath(pathname, target)}
+      className="flex items-center gap-2 rounded-full border border-surface-border bg-background px-3.5 py-2 text-sm font-medium text-muted transition-colors duration-150 hover:text-primary"
+    >
+      <GlobeIcon className="size-4" />
+      {getDictionary(lang).footer.languageName}
+    </Link>
   );
 }
