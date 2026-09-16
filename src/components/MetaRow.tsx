@@ -24,7 +24,7 @@ export default function MetaRow({
         {icon}
         <div className="flex min-w-0 flex-col gap-3">
           <span
-            className={`text-base leading-none underline-offset-4 group-hover:underline ${
+            className={`text-base leading-none transition-colors duration-150 group-hover:text-muted ${
               titleWeight === "semibold" ? "font-semibold" : "font-medium"
             }`}
           >

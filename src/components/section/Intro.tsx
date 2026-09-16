@@ -32,7 +32,7 @@ function Segment({ segment }: { segment: IntroSegment }) {
         href={segment.href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${className ?? ""} py-1 underline-offset-4 hover:underline`.trim()}
+        className={`${className ?? ""} py-1 transition-colors duration-150 hover:text-muted`.trim()}
       >
         {segment.text}
       </Link>
