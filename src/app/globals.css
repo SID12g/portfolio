@@ -74,8 +74,8 @@ html {
 }
 
 ::selection {
-  background: #f54e00;
-  color: #ffffff;
+  background: var(--color-invert-bg);
+  color: var(--color-invert-fg);
 }
 
 .prose-custom {
