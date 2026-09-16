@@ -8,20 +8,27 @@ import PostsLoader from "@/components/PostsLoader";
 import Profile from "@/components/section/Profile";
 import Stack from "@/components/section/Stacks";
 import Projects from "@/components/section/Projects";
+import type { Locale } from "@/i18n/config";
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const lang = (await params).lang as Locale;
+
   return (
     <div className="flex flex-col gap-15">
-      <Profile />
-      <Intro />
-      <Education />
-      <Activities />
+      <Profile lang={lang} />
+      <Intro lang={lang} />
+      <Education lang={lang} />
+      <Activities lang={lang} />
       <Stack />
-      <Certifications />
-      <Projects />
-      <PostsLoader />
+      <Certifications lang={lang} />
+      <Projects lang={lang} />
+      <PostsLoader lang={lang} />
       <Contributions />
-      <Info />
+      <Info lang={lang} />
     </div>
   );
 }

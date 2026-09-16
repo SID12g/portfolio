@@ -1,0 +1,50 @@
+---
+title: RECON
+description: A browser extension that detects phishing in real time
+image: /projects/recon/thumbnail.png
+logo: /projects/recon/logo.png
+preview: /projects/recon/preview.png
+team: Bean Noodles
+date: 2026
+source: https://github.com/bean-noodles
+stacks: React, Nest.js, Prisma, Supabase
+order: 9
+---
+
+### 1. Overview
+
+Phishing sites have surged recently, and the risk they pose to internet users has grown right along with them.
+
+Phishing sites are hard for ordinary people to tell apart from the real thing, and anyone, of any age, can fall victim.
+
+Against this backdrop, KISA (Korea Internet & Security Agency) runs Pharming Alert, a service that detects and warns users when malicious code redirects them to a fake site, and it has cut pharming-related crime by more than 80%.
+
+That shows the main reason people fall victim to phishing and pharming is that they simply don't recognize the risk of a site before they're on it.
+
+Building on that precedent, I developed RECON to meaningfully reduce the damage caused by phishing by helping users recognize the risk of a site before they even visit it.
+
+### 2. System Architecture
+
+This project is a browser extension, built on [Jonghakseo/chrome-extension-boilerplate-react-vite](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite), which is based on `React` and `Vite`.
+
+I built the backend server with `Nest.js` using `Prisma` to collect and store data from the extension.
+
+`Supabase` was used as the database.
+
+RECON has the following service architecture.
+
+| Service                   | Role                                                                                                                                                                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Extension                 | Sends data about the sites a user visits to the server, and displays the analysis results it receives back                                                                                                     |
+| Backend server            | Forwards data from the extension to the phishing detection model, sends the model's analysis results back to the extension, stores the results in the database, and provides the stored data to the admin dashboard |
+| Phishing detection model  | Analyzes the data sent from the server and returns the result                                                                                                                                                    |
+| Admin dashboard           | Uses the analysis data stored in the database, received from the server, to provide phishing site status, risk statistics, detailed analysis, and more to support running and using the service                |
+| Database                  | Stores the analysis results received from the server and provides the stored data back to the server; each analysis result consists of a phishing site's risk level and the reasoning behind it, and the accumulated data is used for future model improvements and collaboration with related organizations |
+
+### 3. Retrospective
+
+This project was built to enter DACON's ["Phishing & Scam Prevention Service Development Competition"](https://dacon.io/competitions/official/236666/leaderboard).
+
+I built a team to enter the competition, and we worked hard together on planning, design, and development — but unfortunately, we didn't place.
+
+Even so, getting to build a new kind of app in the form of a browser extension, and using `Prisma` for the first time, made this a project that helped me grow a lot.

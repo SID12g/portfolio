@@ -1,0 +1,36 @@
+---
+title: Next Image Blur
+description: A way to blur images in Next.js
+image: /projects/next-image-blur/thumbnail.png
+logo: /projects/next-image-blur/logo.png
+preview: /projects/next-image-blur/preview.png
+team: Personal
+date: 2025
+source: https://www.npmjs.com/package/next-image-blur
+stacks: Next.js, npm, GitHub Workflow
+order: 8
+---
+
+### 1. Overview
+
+This project is an npm library that automatically generates the blur data URL needed to apply a blur effect with Next.js's Image component.
+
+Applying a `placeholder blur` effect to an image in Next.js requires either providing a `blurDataURL` directly or building a function per project that returns one — I built this library to solve the hassle of building that function over and over.
+
+The core idea is simple: call a single built-in function, pass it an image path, and it automatically generates the appropriate `blurDataURL` — helping developers improve their image-loading UX more efficiently.
+
+### 2. System Architecture
+
+You can install `next-image-blur` with the command below.
+
+```bash
+pnpm add next-image-blur
+```
+
+I set up a `GitHub Workflow` pipeline that automatically publishes the package to the npm registry.
+
+### 3. Retrospective
+
+The biggest significance of this project is that it was my first time building and publishing my own open source library to npm.
+
+Going through the process of publishing to the npm registry gave me a better understanding of library development and its ecosystem.

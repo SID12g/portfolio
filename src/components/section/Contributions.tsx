@@ -19,7 +19,7 @@ export default function Contributions() {
 function ContributionItemView({ item }: { item: ContributionItem }) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between items-center">
         <Link
           href={item.repositoryHref}
           target="_blank"
@@ -34,11 +34,11 @@ function ContributionItemView({ item }: { item: ContributionItem }) {
               height={64}
             />
           </div>
-          <span className="font-jetbrains-mono text-sm text-accent group-hover:underline transition-all duration-150">
+          <span className="font-jetbrains-mono text-xs sm:text-sm text-accent group-hover:underline transition-all duration-150">
             {item.repository}
           </span>
         </Link>
-        <span className="font-jetbrains-mono text-muted text-xs whitespace-nowrap">
+        <span className="font-jetbrains-mono text-muted text-[10px] sm:text-xs whitespace-nowrap">
           {item.date}
         </span>
       </div>
@@ -46,7 +46,7 @@ function ContributionItemView({ item }: { item: ContributionItem }) {
         href={item.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="font-jetbrains-mono text-sm hover:text-accent transition-colors duration-150"
+        className="font-jetbrains-mono text-xs sm:text-sm hover:text-accent transition-colors duration-150"
       >
         {item.title}
       </Link>

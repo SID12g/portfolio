@@ -1,15 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --color-background: #111111;
-  --color-muted: #7d7d7d;
-  --color-primary: #d8d8d8;
-  --color-faint: #323232;
-  --color-accent: #3a8ae0;
-  --color-muted-15: rgba(125, 125, 125, 0.15);
-  --color-muted-5: rgba(125, 125, 125, 0.05);
-  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-background: #f7f7f4;
+  --color-muted: #807d72;
+  --color-primary: #26251e;
+  --color-faint: #e6e5e0;
+  --color-accent: #f54e00;
+  --color-muted-15: #e6e5e0;
+  --color-muted-5: #ffffff;
+  --color-white-10: rgba(38, 37, 30, 0.12);
+  --color-hover: rgba(38, 37, 30, 0.04);
   --color-black: #000000;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #111111;
+    --color-muted: #7d7d7d;
+    --color-primary: #d8d8d8;
+    --color-faint: #323232;
+    --color-accent: #3a8ae0;
+    --color-muted-15: rgba(125, 125, 125, 0.15);
+    --color-muted-5: rgba(125, 125, 125, 0.05);
+    --color-white-10: rgba(255, 255, 255, 0.1);
+    --color-hover: rgba(255, 255, 255, 0.1);
+    color-scheme: dark;
+  }
 }
 
 @theme inline {
@@ -21,6 +38,7 @@
   --color-muted-15: var(--color-muted-15);
   --color-muted-5: var(--color-muted-5);
   --color-white-10: var(--color-white-10);
+  --color-hover: var(--color-hover);
   --color-black: var(--color-black);
 
   --font-pretendard: var(--font-pretendard);
@@ -35,10 +53,22 @@ html {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+::selection {
+  background: #f54e00;
+  color: #ffffff;
+}
+
 .prose-custom {
   line-height: 1.75;
   color: var(--color-primary);
   font-weight: 500;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .prose-custom {
+    font-size: 1rem;
+  }
 }
 
 .prose-custom h1,

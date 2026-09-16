@@ -1,24 +1,29 @@
-import { mdxComponents } from "@/components/mdx-components";
+import { getMdxComponents } from "@/components/mdx-components";
 import { MediaGallery } from "@/components/MediaPreview";
 import Separator from "@/components/Separator";
+import Tag from "@/components/Tag";
 import { getProjectAssets, getProjects } from "@/utils/projects";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import remarkGfm from "remark-gfm";
+import { locales, localizePath, type Locale } from "@/i18n/config";
 
 export async function generateStaticParams() {
-  return getProjects().map((p) => ({ slug: p.slug }));
+  return locales.flatMap((lang) =>
+    getProjects(lang).map((p) => ({ lang, slug: p.slug })),
+  );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const project = getProjects().find((p) => p.slug === slug);
+  const { lang: rawLang, slug } = await params;
+  const lang = rawLang as Locale;
+  const project = getProjects(lang).find((p) => p.slug === slug);
   if (!project) return {};
   return {
     title: `${project.meta.title} • sid12g`,
@@ -29,10 +34,11 @@ export async function generateMetadata({
 export default async function ProjectPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const project = getProjects().find((p) => p.slug === slug);
+  const { lang: rawLang, slug } = await params;
+  const lang = rawLang as Locale;
+  const project = getProjects(lang).find((p) => p.slug === slug);
   if (!project) notFound();
 
   const { meta, content } = project;
@@ -41,7 +47,7 @@ export default async function ProjectPage({
   return (
     <div className="flex flex-col gap-8">
       <Link
-        href="/projects"
+        href={localizePath(lang, "/projects")}
         className="text-sm text-muted font-jetbrains-mono hover:text-primary transition-colors duration-150"
       >
         ← PROJECTS
@@ -144,15 +150,9 @@ export default async function ProjectPage({
 
       {/* 스택 태그 */}
       {meta.stacks && (
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           {meta.stacks.split(",").map((stack) => (
-            <span
-              className="text-xs text-muted font-jetbrains-mono px-3 py-[6px] bg-muted-15 rounded-full border border-faint w-fit flex flex-row gap-2 items-center"
-              key={stack.trim()}
-            >
-              <div className="bg-accent w-[6px] h-[6px] rounded-full" />
-              {stack.trim()}
-            </span>
+            <Tag key={stack.trim()} label={stack.trim()} />
           ))}
         </div>
       )}
@@ -163,7 +163,7 @@ export default async function ProjectPage({
       <article className="prose-custom">
         <MDXRemote
           source={content}
-          components={mdxComponents}
+          components={getMdxComponents(lang)}
           options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
         />
       </article>
@@ -173,6 +173,7 @@ export default async function ProjectPage({
         <div>
           <Separator title="ASSETS" />
           <MediaGallery
+            lang={lang}
             items={assets.map((a) => ({ src: a.url, name: a.name, type: a.type }))}
           />
         </div>

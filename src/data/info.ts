@@ -33,6 +33,11 @@ export const info: InfoItem[] = [
   {
     label: "PORTFOLIO",
     content: "porfolio.pdf",
-    href: "https://drive.google.com/file/d/1MVw75bZahgLSM66Dn3Iqs2Z7_gmKMUsg/view?usp=sharing",
+    href: "/portfolio",
+  },
+  {
+    label: "RESUME",
+    content: "resume.pdf",
+    href: "/resume",
   },
 ];

@@ -1,0 +1,62 @@
+---
+title: Bamboo Master
+description: Avoid flying arrows
+image: /projects/bamboo-master/thumbnail.png
+logo: /projects/bamboo-master/logo.png
+preview: /projects/bamboo-master/preview.png
+team: Personal
+date: 2024
+source: https://github.com/SID12g/bamboo-master
+stacks: JavaScript, p5.js, Webpack
+order: 7
+---
+
+> This project was built for the "Data Structures" inquiry project, a subject in the 2nd-year Web Programming major track at Korea Digital Media High School.
+
+### 1. Overview
+
+The inquiry project activity involved picking a book, reading it, and then building a project related to its themes. I read The Selfish Gene and wanted to build a project exploring the nature of genes and the process and outcome of inheritance.
+
+The Selfish Gene is about the primacy and precedence of the gene. The author, Richard Dawkins, argues that genes behave in a way that isn't altruistic and exists solely to be passed on to the next generation. I wanted to use a genetic algorithm, since it captures these same characteristics.
+
+I thought about what kind of project could combine an artificial neural network with a genetic algorithm, and I got the idea from a friend nearby who often played Bamboo Master, a classic Korean arcade game — which led me to plan a project where an artificial neural network learns to play Bamboo Master and passes its "genes" on to the next generation.
+
+### 2. What I Did
+
+The plan was to implement Bamboo Master in `JavaScript`, apply an artificial neural network so it could clear the game, and have that neural network's traits passed on to the next generation through a genetic algorithm.
+
+As planned, I first built Bamboo Master itself. You can find the details in the blog post below.
+
+[Building Bamboo Master](https://blog.sid12g.dev/bamboo-master)
+
+At first I didn't even consider a neural network — I thought I could just create entities that randomly pressed the arrow keys (←, ↑, ↓, →) and have them inherit traits. So I started by researching genetic algorithms.
+
+[What is a genetic algorithm?](https://blog.sid12g.dev/genetic-network#%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80)
+
+But even the logic for randomly pressing arrow keys wasn't well defined, and even when an entity endlessly mashed random arrow keys, the input was detected but the character wouldn't move. After a lot of back and forth, I gave up on raw key input and decided to bring in a neural network instead.
+
+[What is an artificial neural network?](https://blog.sid12g.dev/genetic-network#%EC%9D%B8%EA%B3%B5-%EC%8B%A0%EA%B2%BD%EB%A7%9D%EC%9D%B4%EB%9E%80)
+
+I built entities with a neural network and implemented the process of passing those networks on through inheritance.
+
+[Applying the genetic algorithm](https://blog.sid12g.dev/genetic-network#%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
+
+<span style={{ display: "flex", justifyContent: "center" }}>
+  <iframe
+    style={{ borderRadius: 16 }}
+    width="100%"
+    height="315"
+    src="https://www.youtube.com/embed/aMuCE-CbLeQ?si=3KPlK0xKEvOY4z2V"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  ></iframe>
+</span>
+
+### 3. Retrospective
+
+I understood the basic mechanism of a genetic algorithm, but I didn't know what factors to consider when actually writing the flow in code — this project got me a lot closer to understanding how to apply one in practice. Studying artificial neural networks even a little also taught me about their structure. I usually spend most of my time on frontend and backend development, so I'd kept my distance from these kinds of algorithms, but I'm glad this gave me the chance to get closer to them and try something new.
+
+I also ran into a lot of difficulties along the way, and each time a friend helped me work through them — it felt good knowing I had people around me who could help.

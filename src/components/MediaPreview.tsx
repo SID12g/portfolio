@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from "react";
 import type { AssetType } from "@/utils/projects";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 interface MediaPreviewProps {
   src: string;
   name: string;
   type: AssetType;
+  lang: Locale;
 }
 
 const ExternalLinkIcon = () => (
@@ -160,7 +163,15 @@ const ChevronRightIcon = () => (
   </svg>
 );
 
-function Thumbnail({ src, name, type }: MediaPreviewProps) {
+function Thumbnail({
+  src,
+  name,
+  type,
+}: {
+  src: string;
+  name: string;
+  type: AssetType;
+}) {
   if (type === "image") {
     return (
       // eslint-disable-next-line @next/next/no-img-element
@@ -225,7 +236,14 @@ interface GalleryItem {
   type: AssetType;
 }
 
-export function MediaGallery({ items }: { items: GalleryItem[] }) {
+export function MediaGallery({
+  items,
+  lang,
+}: {
+  items: GalleryItem[];
+  lang: Locale;
+}) {
+  const dict = getDictionary(lang).mediaPreview;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -282,7 +300,7 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
             {item.type !== "other" && (
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-150 flex items-end justify-center pb-4">
                 <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium bg-black/50 px-3 py-1 rounded-full">
-                  자세히 보기
+                  {dict.viewDetails}
                 </span>
               </div>
             )}
@@ -302,8 +320,8 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
               setOpenIndex(openIndex - 1);
             }}
             disabled={openIndex === 0}
-            className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-faint opacity-100 flex items-center justify-center text-white hover:opacity-50 transition-opacity duration-150 disabled:opacity-0 disabled:pointer-events-none"
-            title="이전"
+            className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#323232] opacity-100 flex items-center justify-center text-white hover:opacity-50 transition-opacity duration-150 disabled:opacity-0 disabled:pointer-events-none"
+            title={dict.previous}
           >
             <ChevronLeftIcon />
           </button>
@@ -317,7 +335,7 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
               <button
                 onClick={handleShare}
                 className={btnClass}
-                title={copied ? "복사됨" : "링크 복사"}
+                title={copied ? dict.copied : dict.copyLink}
               >
                 {copied ? <CheckIcon /> : <CopyIcon />}
               </button>
@@ -325,7 +343,7 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
                 <button
                   onClick={handleDownload}
                   className={btnClass}
-                  title="다운로드"
+                  title={dict.download}
                 >
                   <DownloadIcon />
                 </button>
@@ -333,14 +351,14 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
               <button
                 onClick={handleNavigate}
                 className={btnClass}
-                title="새 탭에서 열기"
+                title={dict.openNewTab}
               >
                 <ExternalLinkIcon />
               </button>
               <button
                 onClick={() => setOpenIndex(null)}
                 className={btnClass}
-                title="닫기"
+                title={dict.close}
               >
                 <CloseIcon />
               </button>
@@ -371,7 +389,7 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
               />
             )}
             {current.type === "link" && (
-              <div className="w-[320px] h-[200px] rounded-2xl border border-white/20 bg-faint flex flex-col items-center justify-center gap-4 text-white">
+              <div className="w-[320px] h-[200px] rounded-2xl border border-white/20 bg-[#323232] flex flex-col items-center justify-center gap-4 text-white">
                 <LinkIcon />
                 <div className="flex flex-col items-center gap-1">
                   <span className="text-sm font-medium">{current.name}</span>
@@ -385,7 +403,7 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
                   rel="noopener noreferrer"
                   className="text-xs font-medium px-5 py-2 bg-white/15 border border-white/30 rounded-lg hover:bg-white/25 hover:border-white/50 transition-colors duration-150"
                 >
-                  링크 이동하기 ↗
+                  {dict.goToLink}
                 </a>
               </div>
             )}
@@ -398,8 +416,8 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
               setOpenIndex(openIndex + 1);
             }}
             disabled={openIndex === items.length - 1}
-            className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-faint opacity-100 flex items-center justify-center text-white hover:opacity-50 transition-opacity duration-150 disabled:opacity-0 disabled:pointer-events-none"
-            title="다음"
+            className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#323232] opacity-100 flex items-center justify-center text-white hover:opacity-50 transition-opacity duration-150 disabled:opacity-0 disabled:pointer-events-none"
+            title={dict.next}
           >
             <ChevronRightIcon />
           </button>
@@ -409,7 +427,13 @@ export function MediaGallery({ items }: { items: GalleryItem[] }) {
   );
 }
 
-export default function MediaPreview({ src, name, type }: MediaPreviewProps) {
+export default function MediaPreview({
+  src,
+  name,
+  type,
+  lang,
+}: MediaPreviewProps) {
+  const dict = getDictionary(lang).mediaPreview;
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -437,7 +461,7 @@ export default function MediaPreview({ src, name, type }: MediaPreviewProps) {
         {type !== "other" && (
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-150 flex items-end justify-center pb-4">
             <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium bg-black/50 px-3 py-1 rounded-full">
-              자세히 보기
+              {dict.viewDetails}
             </span>
           </div>
         )}
@@ -457,21 +481,21 @@ export default function MediaPreview({ src, name, type }: MediaPreviewProps) {
               <button
                 onClick={handleShare}
                 className={btnClass}
-                title={copied ? "복사됨" : "링크 복사"}
+                title={copied ? dict.copied : dict.copyLink}
               >
                 {copied ? <CheckIcon /> : <CopyIcon />}
               </button>
               <button
                 onClick={handleDownload}
                 className={btnClass}
-                title="다운로드"
+                title={dict.download}
               >
                 <DownloadIcon />
               </button>
               <button
                 onClick={() => setOpen(false)}
                 className={btnClass}
-                title="닫기"
+                title={dict.close}
               >
                 <CloseIcon />
               </button>

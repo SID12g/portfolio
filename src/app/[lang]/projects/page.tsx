@@ -1,20 +1,36 @@
 import Separator from "@/components/Separator";
+import Tag from "@/components/Tag";
 import { getProjects } from "@/utils/projects";
 import Image from "next/image";
 import Link from "next/link";
+import { localizePath, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export const metadata = {
-  title: "Projects • sid12g",
-  description: "sid12g의 프로젝트 목록입니다.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const lang = (await params).lang as Locale;
 
-export default function ProjectsPage() {
-  const projects = getProjects();
+  return {
+    title: "Projects • sid12g",
+    description: getDictionary(lang).projectsPage.metaDescription,
+  };
+}
+
+export default async function ProjectsPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const lang = (await params).lang as Locale;
+  const projects = getProjects(lang);
 
   return (
     <div>
       <Link
-        href="/"
+        href={localizePath(lang, "/")}
         className="text-sm text-muted font-jetbrains-mono hover:text-primary transition-colors duration-150"
       >
         ← HOME
@@ -25,8 +41,8 @@ export default function ProjectsPage() {
         {projects.map((project) => (
           <Link
             key={project.slug}
-            href={`/projects/${project.slug}`}
-            className="flex flex-col gap-4 px-5 py-6 rounded-2xl border border-faint bg-muted-5 hover:border-accent hover:bg-white-10 transition-colors duration-150"
+            href={localizePath(lang, `/projects/${project.slug}`)}
+            className="flex flex-col gap-4 px-5 py-6 rounded-2xl border border-faint bg-muted-5 hover:border-accent hover:bg-hover transition-colors duration-150"
           >
             <div className="flex flex-row">
               <div className="w-[120px] h-[120px] flex-shrink-0 rounded-md overflow-hidden mr-4">
@@ -49,13 +65,7 @@ export default function ProjectsPage() {
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {project.meta.stacks.split(",").map((tag) => (
-                    <span
-                      className="text-xs text-muted font-jetbrains-mono px-3 py-[6px] bg-muted-15 rounded-full border border-faint w-fit flex flex-row gap-3 items-center"
-                      key={tag}
-                    >
-                      <div className="bg-accent w-[6px] h-[6px] rounded-full" />
-                      {tag}
-                    </span>
+                    <Tag key={tag} label={tag} />
                   ))}
                 </div>
               </div>

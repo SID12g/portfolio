@@ -1,0 +1,70 @@
+---
+title: advocate
+description: Opening a new paradigm in special education.
+image: /projects/advocate/thumbnail.png
+logo: /projects/advocate/logo.png
+preview: /projects/advocate/preview.png
+team: DOTE
+date: 2024
+source: https://github.com/Team-DOTE
+stacks: Next.js, React, MongoDB, Python
+order: 3
+---
+
+### 1. Overview
+
+The number of special education participants — special education teachers and students with special needs alike — has been growing rapidly, and interest in the field has grown just as fast.
+
+Discussions and support around special education are actively taking place in society today, and against this backdrop I developed advocate to support both students with special needs and the special education teachers who work with them.
+
+While researching problems in special education for this project, I identified issues that arise when planning an IEP (Individualized Education Program), the curriculum designed for students with special needs.
+
+An IEP is supposed to define concrete educational goals and the teaching methods to achieve them, but in practice, plans very often lacked specific goals and methods.
+
+There was also a problem with the planning process itself: principals, vice principals, homeroom teachers, and parents are all supposed to communicate directly and take part in shaping the curriculum, but in reality this rarely happened well.
+
+As a result, special education teachers often lacked the chance to properly understand each student's characteristics and how best to guide them, while students with special needs lost out on the education suited to them.
+
+To solve these problems, I planned a platform that lets teachers build detailed, student-specific education plans based on each student's characteristics, and that helps special education teachers run their classes more smoothly as demand for special education keeps growing.
+
+I brought together friends who shared this interest, and the three of us built it together.
+
+### 2. System Architecture
+
+The project used the following stack.
+
+Since all team members already knew `React`, the features weren't overly complex, and different clients needed to see different screens, we decided to build a full-stack web app with `Next.js`.
+
+We used the `GPT API` to generate IEPs, and for a more specialized curriculum we collected and organized real IEP cases from textbooks and the internet, then fine-tuned an existing `GPT` model on that data.
+
+| Category | Stack                 |
+| -------- | --------------------- |
+| Frontend | Next.js, React, PWA   |
+| Backend  | Next.js, MongoDB, EC2 |
+| AI       | GPT (Fine-tuned)      |
+
+advocate provides the following features.
+
+| Feature            | Description                                                          |
+| ------------------- | --------------------------------------------------------------------- |
+| Student management  | Register students, view detailed information, and more                |
+| Response manual      | Provides a response manual for behavioral issues, tailored to each student's characteristics |
+| IEP generation       | Generates an IEP tailored to a student, based on their detailed information |
+
+### 3. Retrospective
+
+This is a project I personally poured a lot of passion and care into, from planning all the way through development.
+
+It ran for more than six months, with the team meeting at least once a week to keep discussing progress. A friend's father, who is a developer, always joined us and acted as a mentor.
+
+Talking things through with my teammates, we thought deeply about how to help different kinds of people live better in society, and I think those conversations made the project stronger.
+
+To make sure it would actually help, we met with real special education teachers to get advice on which features were truly needed, and we pulled real cases directly from special education textbooks, official special education guidebooks from education offices, and online communities for special educators.
+
+We organized all of that material and used it either to fine-tune the IEP model or to build the response manual.
+
+We didn't just focus on development performance — we focused on whether the features actually mattered.
+
+We wanted to genuinely help special education teachers teach their students. Unlike before — when few of the people involved in a student's education plan actually participated, and no distinct teaching methods or goals were set — we hoped teachers and guardians would actively take part in shaping each student's education plan, so students could receive an education suited to them and grow into members of society. That hope is what kept us going.
+
+On top of that, using the `GPT API`, fine-tuning it, handling `MDX` inside `Next.js`, and building a backend with `Next.js` were all things I was trying for the first time — but sharing the experience with my teammates let me pick them up quickly.

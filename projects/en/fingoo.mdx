@@ -1,0 +1,47 @@
+---
+title: FINGOO
+description: Investment Learning Starts, Investment Analysis AI
+image: /projects/fingoo/thumbnail.png
+logo: /projects/fingoo/logo.png
+preview: /projects/fingoo/preview.png
+team: FINGOO
+date: 2026
+source: https://github.com/Fingoo-org
+stacks: React Native, Nativewind, Zustand, Tanstack Query, Jest
+order: 11
+---
+
+### 1. Overview
+
+FINGOO is a service that brings investment learning and AI-powered investment analysis together in a single app.
+
+While studying at the University of Seoul, I was approached by the team's marketer, who had noticed my activity on GitHub, and invited me to join the project.
+
+I'd always been interested in investing, so the topic itself was compelling, and I saw it as a chance to grow as a developer by working on a real, live product — so I decided to join.
+
+I came on as a frontend developer in May 2026. Version 3 is currently live, and we're now building version 4, targeting a release in early 2027.
+
+### 2. System Architecture
+
+I'm responsible for frontend development on the team, and the app is built on `React Native` and `Expo`. `Expo` has recently improved so much as a developer experience that it's even recommended in the official `React Native` docs, which made it feel like a safe choice.
+
+For styling, I introduced `Nativewind`, which offers syntax similar to `Tailwind CSS`, to keep our design consistent across the team as we collaborated.
+
+For client-side state management, we decided to use `Zustand`, a widely adopted library. We also introduced `Tanstack Query` for server state management to handle caching and synchronization efficiently, and set up a test environment with `Jest`.
+
+FINGOO is made up of the following screens.
+
+| Screen                 | Role                                                                          |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| Home screen            | Ask the conversational AI for investment analysis, with suggested questions   |
+| Learning screen        | Learn investing fundamentals step by step through card-based content          |
+| Market analysis screen | Get real-time data and charts in response to questions about specific stocks  |
+| Ranking screen         | Earn XP through attendance checks and quizzes, and compete on the leaderboard |
+
+### 3. Retrospective
+
+I assumed `Nativewind` would behave exactly like `Tailwind CSS`, but while developing I found that the two libraries actually have different default scale values in places. I shared this with the team, which helped us avoid style inconsistencies down the line.
+
+Working as a frontend developer on a product with real users, from early on, gave me a different sense of responsibility — and different lessons — than my previous personal projects.
+
+Using the feedback we've gathered from running version 3, we're now building a better version 4.

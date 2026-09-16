@@ -1,0 +1,50 @@
+---
+title: AFO
+description: Interactive visualization of squad's problem-solving processes.
+image: /projects/afo/thumbnail.png
+logo: /projects/afo/logo.png
+preview: /projects/afo/preview.png
+team: Bean Noodles
+date: 2026
+source: https://github.com/bean-noodles
+stacks: React, Fast API, Supabase
+order: 12
+---
+
+> This project is an entry to [JunctionX Korea 2026](https://blog.sid12g.dev/junctionx-korea-2026).
+
+### 1. Overview
+
+Multi-agent squads that combine several small models into role-specific collaborators are increasingly showing that, when well designed, they can outperform a single frontier model at problem solving.
+
+But as squads get more sophisticated, it's gotten harder for users to see how a squad is composed, and in what order and relationship each agent breaks down and works on a problem. Existing AI interfaces flatten work that multiple agents perform in parallel into a single, linear conversation.
+
+AFO (All Forward One) was built to solve this problem — it's a tool that visualizes, as a node-based graph, how a squad made up of a `Planner` and several specialized agents works through a user's request.
+
+Users can see the squad's composition at a glance, and interactively follow which order (vertical axis) and parallel relationship (horizontal axis) each agent ran in, along with the input it received and the output it produced.
+
+I built this project with team Bean Noodles, taking on a full-stack role developing both the `React`-based client and the `FastAPI`-based server.
+
+### 2. System Architecture
+
+AFO works by taking a user's input, having the squad process it, and returning the result.
+
+The squad consists of a `Planner` that analyzes the request and builds an execution plan, specialized agents such as `Coding Agent`, `Math Agent`, and `Generic Agent` for different domains, and the One Shot Prompt delivered to each agent. Tasks with no dependencies on each other are grouped into the same wave and run at the same time, and the agents' outputs are then summarized back into a single result.
+
+| Service  | Role                                                                                                                                                                 |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Client   | Takes the user's request, manages squads and sessions, and visualizes each wave of agents' reasoning as a node graph                                                 |
+| Server   | Builds the squad's composition and execution plan, runs agents in parallel and summarizes their results, and manages authentication and session/conversation history |
+| Database | Stores user authentication data along with squad and session/conversation history                                                                                    |
+
+I built the client with `React`, `TypeScript`, and `Vite`. In the node graph, the vertical axis represents the order agents ran in (by wave), and the horizontal axis represents parallel execution within the same wave, so users can intuitively follow the squad's reasoning flow.
+
+I built the server with `FastAPI` and `Python`, using `Supabase` as the database for authentication and for storing squads and conversation history.
+
+### 3. Retrospective
+
+While putting the squad together, I spent a lot of time researching different agent collaboration structures — Planner-Solver-Judge, Solver-Aggregator, and more — sketching candidate configurations by hand and comparing and validating them. Through this, I came to feel that how clearly you separate roles and prompts matters more for a squad's performance than simply adding more agents.
+
+Building a visualization that lets users follow multiple agents running in parallel — not tediously, but in a way that's actually engaging — turned out to be trickier than I expected. Before landing on the node graph structure, where the vertical axis represents order and the horizontal axis represents parallelism, I had to try and refine several different layouts.
+
+Building both the `React` client and the `FastAPI` server let me build a product end to end for the first time — authentication, squad parsing, and near real-time graph playback all included — and gave me a lot to think about in terms of how to design a multi-agent system that people can actually trust and understand.

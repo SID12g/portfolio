@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { Locale } from "@/i18n/config";
 
 export type AssetType = "image" | "video" | "pdf" | "link" | "other";
 
@@ -64,14 +65,15 @@ interface Project {
 
 const projectDir = "projects";
 
-export function getProjects(): Project[] {
-  const projectFiles = fs.readdirSync(path.join(process.cwd(), projectDir));
+export function getProjects(lang: Locale): Project[] {
+  const dir = path.join(process.cwd(), projectDir, lang);
+  const projectFiles = fs.readdirSync(dir);
 
   const allProjects: Project[] = projectFiles
     .filter((f) => f.endsWith(".mdx"))
     .map((filename) => {
       const fileContent = fs.readFileSync(
-        path.join(process.cwd(), projectDir, filename),
+        path.join(dir, filename),
         "utf-8",
       );
       const { data: frontMatter, content } = matter(fileContent);
