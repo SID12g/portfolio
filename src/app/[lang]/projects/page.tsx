@@ -39,7 +39,7 @@ export default async function ProjectsPage({
       <div className="flex flex-col gap-6">
         <Link
           href={localizePath(lang, "/")}
-          className="flex w-fit items-center gap-2 text-sm leading-none font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
+          className="-my-2 flex w-fit items-center gap-2 py-2 pr-2 text-sm leading-none font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
         >
           <ArrowLeftIcon className="size-3.5" />
           {dict.breadcrumb}

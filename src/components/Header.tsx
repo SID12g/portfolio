@@ -22,21 +22,21 @@ export default function Header({ lang }: { lang: Locale }) {
       <nav className="flex w-full items-center justify-between gap-4 rounded-full border border-faint bg-background px-3 py-2 md:w-fit md:justify-start md:gap-10">
         <Link
           href={home}
-          className="shrink-0 pl-3 text-base leading-none font-semibold"
+          className="shrink-0 py-2.5 pl-3 text-base leading-none font-semibold"
         >
           sid12g.dev
         </Link>
 
-        <div className="hidden items-center gap-5 text-sm leading-none whitespace-nowrap md:flex">
+        <div className="-mx-2.5 hidden items-center text-sm leading-none whitespace-nowrap md:flex">
           {sectionIds.map((id, index) => (
             <Link
               key={id}
               href={`${home}#${id}`}
-              className={
+              className={`px-2.5 py-2.5 ${
                 index === 0
                   ? "font-semibold text-primary"
                   : "font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
-              }
+              }`}
             >
               {dict.sections[id]}
             </Link>

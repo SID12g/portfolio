@@ -13,7 +13,7 @@ export default function Footer({ lang }: { lang: Locale }) {
           © {year}{" "}
           <Link
             href={localizePath(lang, "/")}
-            className="hover:text-primary transition-colors duration-150"
+            className="py-2 transition-colors duration-150 hover:text-primary"
           >
             sid12g
           </Link>{" "}
