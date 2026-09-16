@@ -8,9 +8,6 @@ export interface IntroSegment {
 
 export const dictionaries = {
   ko: {
-    common: {
-      more: "더보기 →",
-    },
     nav: {
       contact: "연락하기",
     },
@@ -126,17 +123,11 @@ export const dictionaries = {
       all: "전체",
       assets: "자료",
     },
-    posts: {
-      loadError: "포스트를 불러오는데 실패했습니다.",
-    },
     footer: {
       languageName: "한국어",
     },
   },
   en: {
-    common: {
-      more: "More →",
-    },
     nav: {
       contact: "Contact",
     },
@@ -252,9 +243,6 @@ export const dictionaries = {
       title: "Projects",
       all: "All",
       assets: "Assets",
-    },
-    posts: {
-      loadError: "Failed to load posts.",
     },
     footer: {
       languageName: "English",

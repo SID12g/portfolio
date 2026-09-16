@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "../globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import QueryProvider from "@/components/providers/QueryProvider";
 import { locales, type Locale } from "@/i18n/config";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
@@ -69,8 +68,8 @@ export async function generateMetadata({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f7f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0d0d" },
   ],
 };
 
@@ -89,17 +88,15 @@ export default async function RootLayout({
       className={`${pretendard.variable} ${jetBrainsMono.variable} antialiased`}
     >
       <body>
-        <QueryProvider>
-          <Analytics />
-          <SpeedInsights />
-          <div className="flex min-h-screen flex-col pt-6 sm:pt-[60px]">
-            <Header lang={lang} />
-            <main className="mx-auto w-full max-w-[768px] flex-1 px-6">
-              {children}
-            </main>
-            <Footer lang={lang} />
-          </div>
-        </QueryProvider>
+        <Analytics />
+        <SpeedInsights />
+        <div className="flex min-h-screen flex-col pt-6 sm:pt-[60px]">
+          <Header lang={lang} />
+          <main className="mx-auto w-full max-w-[768px] flex-1 px-6">
+            {children}
+          </main>
+          <Footer lang={lang} />
+        </div>
       </body>
 
       <Script
