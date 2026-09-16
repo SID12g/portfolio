@@ -1,43 +1,53 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getDictionary } from "@/i18n/dictionaries";
 import { localizePath, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export default function NotFoundView({ lang }: { lang: Locale }) {
-  const router = useRouter();
-  const [count, setCount] = useState(10);
-
+export default function NotFoundView({
+  lang,
+  seconds,
+}: {
+  lang: Locale;
+  seconds: number;
+}) {
   const dict = getDictionary(lang).notFound;
-  const homeHref = localizePath(lang, "/");
+  const home = localizePath(lang, "/");
+  const [count, setCount] = useState(seconds);
 
   useEffect(() => {
     if (count === 0) {
-      router.push(homeHref);
+      // 404 페이지는 앱 레이아웃 밖에서 렌더링되므로 전체 페이지 이동으로 홈을 새로 불러옴
+      window.location.replace(home);
       return;
     }
-    const timer = setTimeout(() => setCount((c) => c - 1), 1000);
-    return () => clearTimeout(timer);
-  }, [count, router, homeHref]);
+    const timer = window.setTimeout(() => setCount((c) => c - 1), 1000);
+    return () => window.clearTimeout(timer);
+  }, [count, home]);
 
   return (
-    <div className="h-[84vh] flex flex-col items-center justify-center min-h-[60vh] gap-8 text-center">
-      <div className="flex flex-col gap-3">
-        <p className="text-xs text-muted font-jetbrains-mono tracking-widest uppercase">
-          {dict.label}
+    <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-4">
+        <p className="text-sm leading-none font-medium text-nav-inactive">
+          404
         </p>
-        <h1 className="text-3xl sm:text-4xl font-medium">{dict.title}</h1>
-        <p className="text-sm sm:text-base text-muted">{dict.description}</p>
+        <h1 className="text-[40px] leading-[1.2] font-bold">{dict.title}</h1>
+        <p className="text-base leading-[1.7] font-medium text-muted">
+          {dict.description}
+        </p>
       </div>
-      <div className="flex flex-col items-center gap-4">
-        <button
-          onClick={() => router.push(homeHref)}
-          className="cursor-pointer rounded-full border border-invert-bg bg-invert-bg px-5 py-3.5 text-sm leading-none font-medium text-invert-fg transition-colors duration-150 hover:border-invert-hover hover:bg-invert-hover"
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+        {/* JS가 로드되지 않아도 이동할 수 있도록 일반 링크 사용 */}
+        <a
+          href={home}
+          className="flex items-center justify-center rounded-full border border-invert-bg bg-invert-bg px-5 py-3.5 text-sm leading-none font-medium text-invert-fg transition-colors duration-150 hover:border-invert-hover hover:bg-invert-hover"
         >
           {dict.button}
-        </button>
-        <p className="text-xs text-muted font-jetbrains-mono">
+        </a>
+        <p
+          aria-live="polite"
+          className="text-sm leading-none font-medium text-nav-inactive tabular-nums"
+        >
           {dict.countdown(count)}
         </p>
       </div>

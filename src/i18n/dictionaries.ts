@@ -97,11 +97,10 @@ export const dictionaries = {
       ] satisfies IntroSegment[][],
     },
     notFound: {
-      label: "404 Not Found",
       title: "페이지를 찾을 수 없습니다",
       description: "요청하신 페이지가 존재하지 않거나 이동되었습니다.",
-      button: "홈으로 이동 →",
-      countdown: (seconds: number) => `${seconds}초 후 자동으로 이동합니다`,
+      button: "홈으로 이동",
+      countdown: (seconds: number) => `${seconds}초 후 홈으로 이동합니다`,
     },
     mediaPreview: {
       previous: "이전",
@@ -215,12 +214,10 @@ export const dictionaries = {
       ] satisfies IntroSegment[][],
     },
     notFound: {
-      label: "404 Not Found",
-      title: "Page Not Found",
+      title: "Page not found",
       description: "The page you requested doesn't exist or has been moved.",
-      button: "Go Home →",
-      countdown: (seconds: number) =>
-        `Redirecting automatically in ${seconds}s`,
+      button: "Go Home",
+      countdown: (seconds: number) => `Redirecting to home in ${seconds}s`,
     },
     mediaPreview: {
       previous: "Previous",

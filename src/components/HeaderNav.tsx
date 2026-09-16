@@ -12,12 +12,16 @@ const SCROLL_IDLE = 200;
 export default function HeaderNav({
   home,
   sections,
+  isNotFound = false,
 }: {
   home: string;
   sections: { id: string; label: string }[];
+  isNotFound?: boolean;
 }) {
   // 프록시 리라이트(/ → /ko) 영향을 받지 않도록 [lang] 레이아웃 아래 세그먼트로 홈 여부를 판단
-  const isHome = useSelectedLayoutSegment() === null;
+  // (404 페이지는 레이아웃 밖에서 렌더링되어 세그먼트가 null이므로 따로 구분)
+  const segment = useSelectedLayoutSegment();
+  const isHome = !isNotFound && segment === null;
   const [active, setActive] = useState<string | null>(
     sections[0]?.id ?? null,
   );

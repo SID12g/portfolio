@@ -14,7 +14,13 @@ const sectionIds = [
   "links",
 ] as const;
 
-export default function Header({ lang }: { lang: Locale }) {
+export default function Header({
+  lang,
+  isNotFound = false,
+}: {
+  lang: Locale;
+  isNotFound?: boolean;
+}) {
   const dict = getDictionary(lang);
   const home = localizePath(lang, "/");
 
@@ -30,6 +36,7 @@ export default function Header({ lang }: { lang: Locale }) {
 
         <HeaderNav
           home={home}
+          isNotFound={isNotFound}
           sections={sectionIds.map((id) => ({
             id,
             label: dict.sections[id],
