@@ -57,7 +57,9 @@ function InfoItemView({ item, lang }: { item: InfoItem; lang: Locale }) {
       }
       href={href}
       title={item.label}
+      titleWeight="medium"
       subtitle={item.content}
+      subtitleWeight="normal"
     />
   );
 }

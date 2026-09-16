@@ -5,35 +5,36 @@ export default function MetaRow({
   icon,
   href,
   title,
+  titleWeight = "semibold",
   subtitle,
+  subtitleWeight = "medium",
   trailing,
 }: {
   icon: ReactNode;
   href?: string;
   title: string;
+  titleWeight?: "medium" | "semibold";
   subtitle: string;
+  subtitleWeight?: "normal" | "medium";
   trailing?: ReactNode;
 }) {
-  const titleClassName = "text-base leading-none font-semibold";
-
-  return (
-    <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2">
+  const content = (
+    <>
       <div className="flex min-w-0 flex-1 items-center gap-3">
         {icon}
         <div className="flex min-w-0 flex-col gap-3">
-          {href ? (
-            <Link
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${titleClassName} hover:underline`}
-            >
-              {title}
-            </Link>
-          ) : (
-            <span className={titleClassName}>{title}</span>
-          )}
-          <span className="text-sm leading-none font-medium text-muted">
+          <span
+            className={`text-base leading-none underline-offset-4 group-hover:underline ${
+              titleWeight === "semibold" ? "font-semibold" : "font-medium"
+            }`}
+          >
+            {title}
+          </span>
+          <span
+            className={`text-sm leading-[1.3] text-muted ${
+              subtitleWeight === "medium" ? "font-medium" : "font-normal"
+            }`}
+          >
             {subtitle}
           </span>
         </div>
@@ -43,6 +44,22 @@ export default function MetaRow({
           {trailing}
         </span>
       )}
-    </div>
+    </>
+  );
+  const className =
+    "flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2";
+
+  if (!href) return <div className={className}>{content}</div>;
+
+  return (
+    <Link
+      href={href}
+      {...(href.startsWith("mailto:")
+        ? {}
+        : { target: "_blank", rel: "noopener noreferrer" })}
+      className={`group ${className}`}
+    >
+      {content}
+    </Link>
   );
 }
