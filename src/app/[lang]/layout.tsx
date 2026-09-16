@@ -1,28 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import "../globals.css";
+import { jetBrainsMono, pretendard } from "../fonts";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { locales, type Locale } from "@/i18n/config";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const pretendard = localFont({
-  src: "../fonts/PretendardVariable.woff2",
-  variable: "--font-pretendard",
-  weight: "45 920",
-  style: "normal",
-  display: "swap",
-});
-
-const jetBrainsMono = localFont({
-  src: "../fonts/JetBrainsMono-Medium.woff2",
-  variable: "--font-jetbrains-mono",
-  weight: "500",
-  style: "normal",
-  display: "swap",
-});
 
 const metaByLang: Record<Locale, { title: string; description: string }> = {
   ko: {
