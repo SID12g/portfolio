@@ -5,8 +5,8 @@ export interface EducationItem {
   href: string;
   icon: string;
   major: Record<Locale, string>;
-  period: string;
-  current?: boolean;
+  start: string;
+  end?: string;
 }
 
 export const education: EducationItem[] = [
@@ -15,8 +15,7 @@ export const education: EducationItem[] = [
     href: "https://www.uos.ac.kr",
     icon: "/images/logos/uos.svg",
     major: { ko: "통계학과", en: "Department of Statistics" },
-    period: "2026.03 ~",
-    current: true,
+    start: "2026-03",
   },
   {
     school: {
@@ -26,6 +25,7 @@ export const education: EducationItem[] = [
     href: "https://dimigo-h.goeas.kr",
     icon: "/images/logos/dimigo.svg",
     major: { ko: "웹프로그래밍과", en: "Department of Web Programming" },
-    period: "2023.03 ~ 2026.01",
+    start: "2023-03",
+    end: "2026-01",
   },
 ];

@@ -17,7 +17,7 @@ export const certifications: CertificationItem[] = [
     },
     href: "https://www.kca.kr",
     icon: "/images/logos/kca.svg",
-    date: "2026.09",
+    date: "2026-09",
   },
   {
     name: { ko: "프로그래밍기능사", en: "Craftsman Programming" },
@@ -27,7 +27,7 @@ export const certifications: CertificationItem[] = [
     },
     href: "https://www.hrdkorea.or.kr",
     icon: "/images/logos/hrdk.png",
-    date: "2026.04",
+    date: "2026-04",
   },
   {
     name: { ko: "리눅스마스터 2급", en: "Linux Master Level 2" },
@@ -37,6 +37,6 @@ export const certifications: CertificationItem[] = [
     },
     href: "https://www.kait.or.kr",
     icon: "/images/logos/kait.png",
-    date: "2023.10",
+    date: "2023-10",
   },
 ];

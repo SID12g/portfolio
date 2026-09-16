@@ -3,6 +3,7 @@ import MetaRow from "@/components/MetaRow";
 import { education, type EducationItem } from "@/data/education";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
+import { formatPeriod } from "@/utils/date";
 
 export default function Education({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang);
@@ -44,9 +45,7 @@ function EducationItemView({
       href={item.href}
       title={item.school[lang]}
       subtitle={item.major[lang]}
-      trailing={
-        item.period + (item.current ? ` - ${dict.current}` : "")
-      }
+      trailing={formatPeriod(item.start, item.end, dict.current)}
     />
   );
 }

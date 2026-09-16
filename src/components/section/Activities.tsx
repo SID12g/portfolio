@@ -3,6 +3,7 @@ import MetaRow from "@/components/MetaRow";
 import { activities, type ActivityItem } from "@/data/activities";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
+import { formatPeriod } from "@/utils/date";
 
 export default function Activities({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang);
@@ -48,7 +49,7 @@ function ActivityItemView({
       href={item.href}
       title={item.organization[lang]}
       subtitle={item.role}
-      trailing={item.period + (item.current ? ` - ${dict.current}` : "")}
+      trailing={formatPeriod(item.start, item.end, dict.current)}
     />
   );
 }

@@ -6,8 +6,8 @@ export interface ActivityItem {
   href: string;
   icon: string;
   iconRounded?: boolean;
-  period: string;
-  current?: boolean;
+  start: string;
+  end?: string;
 }
 
 export const activities: ActivityItem[] = [
@@ -17,8 +17,7 @@ export const activities: ActivityItem[] = [
     href: "https://fingoo.vercel.app",
     icon: "/images/logos/fingoo.png",
     iconRounded: true,
-    period: "2026.05 ~",
-    current: true,
+    start: "2026-05",
   },
   {
     role: "Supporter",
@@ -28,7 +27,6 @@ export const activities: ActivityItem[] = [
     },
     href: "https://bigdatahub.ac.kr",
     icon: "/images/logos/coss.png",
-    period: "2026.04 ~",
-    current: true,
+    start: "2026-04",
   },
 ];

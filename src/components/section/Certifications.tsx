@@ -6,6 +6,7 @@ import {
 } from "@/data/certifications";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { formatDate } from "@/utils/date";
 
 export default function Certifications({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang);
@@ -45,7 +46,7 @@ function CertificationItemView({
       href={item.href}
       title={item.name[lang]}
       subtitle={item.issuer[lang]}
-      trailing={item.date}
+      trailing={formatDate(item.date)}
     />
   );
 }

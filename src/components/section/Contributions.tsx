@@ -3,6 +3,7 @@ import { GitPullRequestIcon } from "@/components/icons";
 import { contributions, type ContributionItem } from "@/data/contributions";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { formatDate } from "@/utils/date";
 
 export default function Contributions({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang);
@@ -51,7 +52,7 @@ function ContributionItemView({ item }: { item: ContributionItem }) {
         </div>
       </div>
       <span className="shrink-0 text-sm leading-none whitespace-nowrap text-muted">
-        {item.date}
+        {formatDate(item.date)}
       </span>
     </div>
   );
