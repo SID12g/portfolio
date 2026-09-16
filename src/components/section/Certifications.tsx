@@ -1,5 +1,5 @@
-import Image from "next/image";
 import MetaRow from "@/components/MetaRow";
+import OrgLogo from "@/components/OrgLogo";
 import {
   certifications,
   type CertificationItem,
@@ -34,15 +34,7 @@ function CertificationItemView({
 }) {
   return (
     <MetaRow
-      icon={
-        <Image
-          src={item.icon}
-          alt=""
-          width={40}
-          height={40}
-          className="size-10 shrink-0 object-contain"
-        />
-      }
+      icon={<OrgLogo src={item.icon} />}
       href={item.href}
       title={item.name[lang]}
       subtitle={item.issuer[lang]}

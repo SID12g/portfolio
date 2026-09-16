@@ -1,5 +1,5 @@
-import Image from "next/image";
 import MetaRow from "@/components/MetaRow";
+import OrgLogo from "@/components/OrgLogo";
 import { activities, type ActivityItem } from "@/data/activities";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
@@ -37,15 +37,7 @@ function ActivityItemView({
 
   return (
     <MetaRow
-      icon={
-        <Image
-          src={item.icon}
-          alt=""
-          width={40}
-          height={40}
-          className={`size-10 shrink-0 object-cover ${item.iconRounded ? "rounded-full" : ""}`}
-        />
-      }
+      icon={<OrgLogo src={item.icon} rounded={item.iconRounded} />}
       href={item.href}
       title={item.organization[lang]}
       subtitle={item.role}

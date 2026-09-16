@@ -1,5 +1,5 @@
-import Image from "next/image";
 import MetaRow from "@/components/MetaRow";
+import OrgLogo from "@/components/OrgLogo";
 import { education, type EducationItem } from "@/data/education";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
@@ -33,15 +33,7 @@ function EducationItemView({
 
   return (
     <MetaRow
-      icon={
-        <Image
-          src={item.icon}
-          alt=""
-          width={40}
-          height={40}
-          className="size-10 shrink-0"
-        />
-      }
+      icon={<OrgLogo src={item.icon} />}
       href={item.href}
       title={item.school[lang]}
       subtitle={item.major[lang]}
