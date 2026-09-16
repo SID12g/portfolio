@@ -107,7 +107,6 @@ export const dictionaries = {
       countdown: (seconds: number) => `${seconds}초 후 자동으로 이동합니다`,
     },
     mediaPreview: {
-      viewDetails: "자세히 보기",
       previous: "이전",
       next: "다음",
       copied: "복사됨",
@@ -115,13 +114,17 @@ export const dictionaries = {
       download: "다운로드",
       openNewTab: "새 탭에서 열기",
       close: "닫기",
-      goToLink: "링크 이동하기 ↗",
+      image: "이미지",
+      video: "동영상",
+      pdf: "PDF",
+      link: "링크",
     },
     projectsPage: {
       metaDescription: "sid12g의 프로젝트 목록입니다.",
       breadcrumb: "포트폴리오",
       title: "프로젝트",
       all: "전체",
+      assets: "자료",
     },
     posts: {
       loadError: "포스트를 불러오는데 실패했습니다.",
@@ -231,7 +234,6 @@ export const dictionaries = {
         `Redirecting automatically in ${seconds}s`,
     },
     mediaPreview: {
-      viewDetails: "View Details",
       previous: "Previous",
       next: "Next",
       copied: "Copied",
@@ -239,13 +241,17 @@ export const dictionaries = {
       download: "Download",
       openNewTab: "Open in New Tab",
       close: "Close",
-      goToLink: "Go to Link ↗",
+      image: "Image",
+      video: "Video",
+      pdf: "PDF",
+      link: "Link",
     },
     projectsPage: {
       metaDescription: "A list of sid12g's projects.",
       breadcrumb: "Portfolio",
       title: "Projects",
       all: "All",
+      assets: "Assets",
     },
     posts: {
       loadError: "Failed to load posts.",

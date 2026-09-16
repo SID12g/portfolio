@@ -1,5 +1,5 @@
 import React from "react";
-import MediaPreview, { MediaGallery } from "./MediaPreview";
+import { MediaGallery } from "./MediaPreview";
 import type { AssetType } from "@/utils/projects";
 import type { Locale } from "@/i18n/config";
 
@@ -14,6 +14,10 @@ function inferType(src: string): AssetType {
   return "other";
 }
 
+function toGalleryItem(src: string) {
+  return { src, name: src.split("/").pop() ?? src, type: inferType(src) };
+}
+
 function CustomParagraph({
   children,
   lang,
@@ -21,9 +25,7 @@ function CustomParagraph({
   children: React.ReactNode;
   lang: Locale;
 }) {
-  const childArray = React.Children.toArray(children);
-
-  const nonWhitespace = childArray.filter(
+  const nonWhitespace = React.Children.toArray(children).filter(
     (child) => !(typeof child === "string" && child.trim() === ""),
   );
 
@@ -31,25 +33,19 @@ function CustomParagraph({
     nonWhitespace.length > 0 &&
     nonWhitespace.every(
       (child) =>
-        React.isValidElement(child) &&
-        typeof child.props === "object" &&
-        child.props !== null &&
-        "src" in (child.props as object),
+        React.isValidElement<{ src?: unknown }>(child) &&
+        typeof child.props.src === "string",
     );
 
+  // 이미지만 있는 문단은 <p> 대신 갤러리로 렌더링
   if (allMedia) {
-    const items = nonWhitespace.map((child) => {
-      const el = child as React.ReactElement<{
-        src: string;
-        name: string;
-        type: AssetType;
-      }>;
-      return { src: el.props.src, name: el.props.name, type: el.props.type };
-    });
-    return <MediaGallery items={items} lang={lang} />;
+    const items = nonWhitespace.map((child) =>
+      toGalleryItem((child as React.ReactElement<{ src: string }>).props.src),
+    );
+    return <MediaGallery items={items} lang={lang} className="mb-5" />;
   }
 
-  return <p className="mb-4">{children}</p>;
+  return <p>{children}</p>;
 }
 
 export function getMdxComponents(
@@ -60,12 +56,26 @@ export function getMdxComponents(
     p: ({ children }: { children: React.ReactNode }) => (
       <CustomParagraph lang={lang}>{children}</CustomParagraph>
     ),
-    img: ({ src }: { src?: string; alt?: string }) => {
-      if (!src) return null;
-      const name = src.split("/").pop() ?? src;
-      return (
-        <MediaPreview src={src} name={name} type={inferType(src)} lang={lang} />
-      );
-    },
+    img: ({ src }: { src?: string }) =>
+      src ? (
+        <MediaGallery
+          items={[toGalleryItem(src)]}
+          lang={lang}
+          className="mb-5"
+        />
+      ) : null,
+    a: ({ href, children }: { href?: string; children: React.ReactNode }) =>
+      href?.startsWith("http") ? (
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      ) : (
+        <a href={href}>{children}</a>
+      ),
+    table: ({ children }: { children: React.ReactNode }) => (
+      <div className="table-wrapper">
+        <table>{children}</table>
+      </div>
+    ),
   };
 }
