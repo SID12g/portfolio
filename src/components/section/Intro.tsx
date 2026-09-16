@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRightIcon } from "@/components/icons";
 import type { Locale } from "@/i18n/config";
 import { getDictionary, type IntroSegment } from "@/i18n/dictionaries";
 
@@ -32,9 +33,10 @@ function Segment({ segment }: { segment: IntroSegment }) {
         href={segment.href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${className ?? ""} py-1 transition-colors duration-150 hover:text-muted`.trim()}
+        className={`${className ?? ""} group py-1 underline decoration-nav-inactive decoration-1 underline-offset-4 transition-colors duration-150 hover:text-muted`.trim()}
       >
         {segment.text}
+        <ArrowUpRightIcon className="mx-0.5 size-3.5 align-[-1px] transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </Link>
     );
   }
