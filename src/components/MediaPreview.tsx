@@ -184,7 +184,7 @@ export function MediaGallery({
                     preload="metadata"
                   />
                   <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="flex size-10 items-center justify-center rounded-full bg-black/60 pl-0.5 text-white transition-transform duration-150 group-hover:scale-110">
+                    <span className="flex size-10 items-center justify-center rounded-full bg-[#0d0d0d] pl-0.5 text-white transition-transform duration-150 group-hover:scale-110">
                       <PlayIcon />
                     </span>
                   </span>
@@ -217,10 +217,10 @@ export function MediaGallery({
 }
 
 const toolbarButtonClass =
-  "flex size-9 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition-colors duration-150 hover:bg-white/20";
+  "flex size-9 cursor-pointer items-center justify-center rounded-full border border-[#333333] bg-[#262626] text-white transition-colors duration-150 hover:bg-[#333333]";
 
 const navButtonClass =
-  "absolute top-1/2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition-colors duration-150 hover:bg-white/20";
+  "absolute top-1/2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[#333333] bg-[#262626] text-white transition-colors duration-150 hover:bg-[#333333]";
 
 function Lightbox({
   items,
@@ -281,17 +281,17 @@ function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={current.name}
-      className="fixed inset-0 z-[100] flex flex-col bg-black/90 p-4 sm:p-6"
+      className="fixed inset-0 z-[100] flex flex-col bg-[#0d0d0d] p-4 sm:p-6"
       onClick={onClose}
     >
       <div
         className="flex items-center justify-between gap-3 text-white"
         onClick={(e) => e.stopPropagation()}
       >
-        <span className="min-w-0 truncate text-sm font-medium text-white/70">
+        <span className="min-w-0 truncate text-sm font-medium text-[#b3b3b3]">
           {current.name}
           {items.length > 1 && (
-            <span className="ml-2 text-white/40">
+            <span className="ml-2 text-[#808080]">
               {index + 1} / {items.length}
             </span>
           )}
