@@ -5,12 +5,8 @@
   --color-muted: rgba(0, 0, 0, 0.6);
   --color-primary: #000000;
   --color-faint: rgba(0, 0, 0, 0.08);
-  --color-accent: #f54e00;
   --color-muted-15: rgba(0, 0, 0, 0.06);
   --color-muted-5: #f7f7f7;
-  --color-white-10: rgba(0, 0, 0, 0.1);
-  --color-hover: rgba(0, 0, 0, 0.04);
-  --color-black: #000000;
 
   --color-nav-inactive: rgba(0, 0, 0, 0.5);
   --color-divider: #d3d3d3;
@@ -26,11 +22,8 @@
     --color-muted: rgba(255, 255, 255, 0.6);
     --color-primary: #f2f2f2;
     --color-faint: rgba(255, 255, 255, 0.1);
-    --color-accent: #3a8ae0;
     --color-muted-15: rgba(255, 255, 255, 0.08);
     --color-muted-5: #171717;
-    --color-white-10: rgba(255, 255, 255, 0.1);
-    --color-hover: rgba(255, 255, 255, 0.06);
 
     --color-nav-inactive: rgba(255, 255, 255, 0.5);
     --color-divider: rgba(255, 255, 255, 0.14);
@@ -46,12 +39,8 @@
   --color-muted: var(--color-muted);
   --color-primary: var(--color-primary);
   --color-faint: var(--color-faint);
-  --color-accent: var(--color-accent);
   --color-muted-15: var(--color-muted-15);
   --color-muted-5: var(--color-muted-5);
-  --color-white-10: var(--color-white-10);
-  --color-hover: var(--color-hover);
-  --color-black: var(--color-black);
 
   --color-nav-inactive: var(--color-nav-inactive);
   --color-divider: var(--color-divider);

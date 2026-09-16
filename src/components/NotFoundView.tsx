@@ -33,7 +33,7 @@ export default function NotFoundView({ lang }: { lang: Locale }) {
       <div className="flex flex-col items-center gap-4">
         <button
           onClick={() => router.push(homeHref)}
-          className="px-6 py-3 rounded-lg border border-faint bg-muted-5 hover:border-accent hover:bg-hover transition-colors duration-150 text-sm font-medium cursor-pointer"
+          className="cursor-pointer rounded-full border border-invert-bg bg-invert-bg px-5 py-3.5 text-sm leading-none font-medium text-invert-fg"
         >
           {dict.button}
         </button>
