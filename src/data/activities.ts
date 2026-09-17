@@ -15,7 +15,7 @@ export const activities: ActivityItem[] = [
     role: "Frontend Developer",
     organization: { ko: "Fingoo", en: "Fingoo" },
     href: "https://fingoo.vercel.app",
-    icon: "/images/logos/fingoo.png",
+    icon: "/images/logos/fingoo.svg",
     iconRounded: true,
     start: "2026-05",
   },
@@ -26,7 +26,7 @@ export const activities: ActivityItem[] = [
       en: "University of Seoul BIGDATAHUB UNIVERSITY",
     },
     href: "https://bigdatahub.ac.kr",
-    icon: "/images/logos/coss.png",
+    icon: "/images/logos/coss.svg",
     start: "2026-04",
   },
 ];

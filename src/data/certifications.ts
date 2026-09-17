@@ -26,7 +26,7 @@ export const certifications: CertificationItem[] = [
       en: "Human Resources Development Service of Korea",
     },
     href: "https://www.hrdkorea.or.kr",
-    icon: "/images/logos/hrdk.png",
+    icon: "/images/logos/hrdk.svg",
     date: "2026-04",
   },
   {
@@ -36,7 +36,7 @@ export const certifications: CertificationItem[] = [
       en: "Korea Association for AI & ICT Promotion",
     },
     href: "https://www.kait.or.kr",
-    icon: "/images/logos/kait.png",
+    icon: "/images/logos/kait.svg",
     date: "2023-10",
   },
 ];
