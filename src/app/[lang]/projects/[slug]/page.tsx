@@ -77,25 +77,37 @@ export default async function ProjectPage({
       </div>
 
       <div className="flex flex-col gap-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex min-w-0 flex-1 items-center gap-5">
-            <div className="size-14 shrink-0 overflow-hidden rounded-lg">
-              <Image
-                src={meta.logo}
-                alt={`${meta.title} logo`}
-                width={112}
-                height={112}
-                className="size-full object-cover"
-              />
-            </div>
-            <div className="flex min-w-0 flex-col gap-2">
-              <h1 className="text-[32px] leading-none font-semibold">
-                {meta.title}
-              </h1>
-              <p className="text-base leading-[1.4] font-medium text-muted">
-                {meta.description}
-              </p>
-            </div>
+        <div className="flex items-center gap-5">
+          <div className="size-14 shrink-0 overflow-hidden rounded-lg">
+            <Image
+              src={meta.logo}
+              alt={`${meta.title} logo`}
+              width={112}
+              height={112}
+              className="size-full object-cover"
+            />
+          </div>
+          <div className="flex min-w-0 flex-col gap-2">
+            <h1 className="text-[32px] leading-none font-semibold">
+              {meta.title}
+            </h1>
+            <p className="text-base leading-[1.4] font-medium text-muted">
+              {meta.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Source 버튼은 제목 옆에 두면 모바일이나 긴 설명에서 제목 영역이 좁아지므로 팀·날짜 줄 오른쪽에 배치 */}
+        <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-3">
+          <div className="flex flex-wrap items-center gap-5">
+            <span className="flex items-center gap-2 text-sm font-medium text-muted">
+              <UsersIcon className="size-3.5" />
+              {meta.team}
+            </span>
+            <span className="flex items-center gap-2 text-sm font-medium text-muted">
+              <CalendarIcon className="size-3.5" />
+              {meta.date}
+            </span>
           </div>
           {meta.source && (
             <Link
@@ -108,17 +120,6 @@ export default async function ProjectPage({
               Source
             </Link>
           )}
-        </div>
-
-        <div className="flex flex-wrap items-center gap-5">
-          <span className="flex items-center gap-2 text-sm font-medium text-muted">
-            <UsersIcon className="size-3.5" />
-            {meta.team}
-          </span>
-          <span className="flex items-center gap-2 text-sm font-medium text-muted">
-            <CalendarIcon className="size-3.5" />
-            {meta.date}
-          </span>
         </div>
 
         {stacks.length > 0 && (
