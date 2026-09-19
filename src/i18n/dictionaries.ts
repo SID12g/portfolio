@@ -91,7 +91,10 @@ export const dictionaries = {
           {
             text: "여러 프로젝트에서 개발뿐 아니라 기획과 디자인까지 함께 맡아왔습니다. 덕분에 ",
           },
-          { text: "프로덕트를 한쪽 면이 아니라 전체로 바라보는 시선", bold: true },
+          {
+            text: "프로덕트를 한쪽 면이 아니라 전체로 바라보는 시선",
+            bold: true,
+          },
           { text: "을 갖게 되었습니다." },
         ],
       ] satisfies IntroSegment[][],
@@ -144,10 +147,10 @@ export const dictionaries = {
       goToBlog: "Go to Blog",
     },
     education: {
-      current: "Enrolled",
+      current: "Present",
     },
     activities: {
-      current: "Active",
+      current: "Present",
     },
     intro: {
       paragraphs: [
@@ -173,7 +176,10 @@ export const dictionaries = {
           {
             text: "I graduated from the Web Programming department at Korea Digital Media High School and am currently studying Statistics in the College of Natural Sciences at the University of Seoul, building a perspective for reading and interpreting data that I can bring to future products. I keep exploring what can be built at ",
           },
-          { text: "the intersection of development and statistics", bold: true },
+          {
+            text: "the intersection of development and statistics",
+            bold: true,
+          },
           { text: "." },
         ],
         [
