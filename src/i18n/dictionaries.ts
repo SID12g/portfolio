@@ -144,7 +144,7 @@ export const dictionaries = {
       name: "Sungmin Cho",
       role: "Frontend Developer",
       viewProjects: "View Projects",
-      goToBlog: "Go to Blog",
+      goToBlog: "Read the Blog",
     },
     education: {
       current: "Present",
@@ -174,7 +174,7 @@ export const dictionaries = {
         ],
         [
           {
-            text: "I graduated from the Web Programming department at Korea Digital Media High School and am currently studying Statistics in the College of Natural Sciences at the University of Seoul, building a perspective for reading and interpreting data that I can bring to future products. I keep exploring what can be built at ",
+            text: "I graduated from Korea Digital Media High School, where I majored in Web Programming, and I'm now studying Statistics at the University of Seoul. I'm learning to read and interpret data, a skill I want to bring to the products I build. I keep exploring what can be built at ",
           },
           {
             text: "the intersection of development and statistics",
@@ -183,15 +183,16 @@ export const dictionaries = {
           { text: "." },
         ],
         [
+          { text: "I believe " },
           {
-            text: "Building a screen is ultimately about designing a user's experience",
+            text: "building a screen is ultimately about designing the user's experience",
             bold: true,
           },
           {
-            text: ", I believe. That's why I've studied Figma alongside development since high school, and I keep broadening that perspective. I even ",
+            text: ". That's why I've been learning Figma alongside development since high school. I even ",
           },
           {
-            text: "made a book using Figma",
+            text: "designed a book in Figma",
             bold: true,
             href: "https://blog.sid12g.dev/figma-book",
           },
@@ -204,15 +205,15 @@ export const dictionaries = {
             bold: true,
           },
           {
-            text: ". However well a screen is designed, if the first paint is slow or input feels laggy, users leave before they ever experience that design. So I pay close attention to rendering strategy, bundle size, and unnecessary re-renders, and confirm improvements with measurable metrics.",
+            text: ". However well a screen is designed, if the first paint is slow or input feels laggy, users leave before they ever experience that design. So I pay close attention to rendering strategy, bundle size, and unnecessary re-renders, and verify improvements with metrics.",
           },
         ],
         [
           {
-            text: "Across many projects I've handled not only development but also planning and design. That's given me ",
+            text: "Across many projects I've handled not only development but also product planning and design. That's taught me to ",
           },
           {
-            text: "a perspective that looks at a product as a whole, not just one side of it",
+            text: "look at a product as a whole, not just one part of it",
             bold: true,
           },
           { text: "." },

@@ -24,7 +24,7 @@ export const education: EducationItem[] = [
     },
     href: "https://dimigo-h.goeas.kr",
     icon: "/images/logos/dimigo.svg",
-    major: { ko: "웹프로그래밍과", en: "Department of Web Programming" },
+    major: { ko: "웹프로그래밍과", en: "Web Programming major" },
     start: "2023-03",
     end: "2026-01",
   },
