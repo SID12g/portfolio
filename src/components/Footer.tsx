@@ -16,8 +16,8 @@ export default function Footer({ lang }: { lang: Locale }) {
             className="py-2 transition-colors duration-150 hover:text-primary"
           >
             sid12g
-          </Link>{" "}
-          All rights reserved.
+          </Link>
+          . All rights reserved.
         </p>
         <LanguageSwitcher lang={lang} />
       </div>
