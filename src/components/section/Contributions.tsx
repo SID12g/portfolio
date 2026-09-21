@@ -18,14 +18,20 @@ export default function Contributions({ lang }: { lang: Locale }) {
       </h2>
       <div className="flex flex-col gap-10">
         {sorted.map((item) => (
-          <ContributionItemView key={item.href} item={item} />
+          <ContributionItemView key={item.href} item={item} lang={lang} />
         ))}
       </div>
     </section>
   );
 }
 
-function ContributionItemView({ item }: { item: ContributionItem }) {
+function ContributionItemView({
+  item,
+  lang,
+}: {
+  item: ContributionItem;
+  lang: Locale;
+}) {
   return (
     <MetaRow
       icon={
@@ -38,7 +44,7 @@ function ContributionItemView({ item }: { item: ContributionItem }) {
       titleWeight="medium"
       subtitle={item.title}
       subtitleWeight="normal"
-      trailing={formatDate(item.date)}
+      trailing={formatDate(item.date, lang)}
     />
   );
 }

@@ -40,8 +40,8 @@ function ActivityItemView({
       icon={<OrgLogo src={item.icon} rounded={item.iconRounded} />}
       href={item.href}
       title={item.organization[lang]}
-      subtitle={item.role}
-      trailing={formatPeriod(item.start, item.end, dict.current)}
+      subtitle={item.role[lang]}
+      trailing={formatPeriod(item.start, item.end, dict.current, lang)}
     />
   );
 }

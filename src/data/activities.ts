@@ -1,7 +1,7 @@
 import type { Locale } from "@/i18n/config";
 
 export interface ActivityItem {
-  role: string;
+  role: Record<Locale, string>;
   organization: Record<Locale, string>;
   href: string;
   icon: string;
@@ -12,7 +12,7 @@ export interface ActivityItem {
 
 export const activities: ActivityItem[] = [
   {
-    role: "Frontend Developer",
+    role: { ko: "Frontend Developer", en: "Frontend Developer" },
     organization: { ko: "Fingoo", en: "Fingoo" },
     href: "https://fingoo.vercel.app",
     icon: "/images/logos/fingoo.svg",
@@ -20,10 +20,10 @@ export const activities: ActivityItem[] = [
     start: "2026-05",
   },
   {
-    role: "Supporter",
+    role: { ko: "Supporter", en: "Student Ambassador" },
     organization: {
       ko: "서울시립대학교 빅데이터혁신융합대학사업단",
-      en: "University of Seoul BIGDATAHUB UNIVERSITY",
+      en: "University of Seoul BigData University",
     },
     href: "https://bigdatahub.ac.kr",
     icon: "/images/logos/coss.svg",

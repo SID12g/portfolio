@@ -37,7 +37,7 @@ function EducationItemView({
       href={item.href}
       title={item.school[lang]}
       subtitle={item.major[lang]}
-      trailing={formatPeriod(item.start, item.end, dict.current)}
+      trailing={formatPeriod(item.start, item.end, dict.current, lang)}
     />
   );
 }

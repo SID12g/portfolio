@@ -38,7 +38,7 @@ function CertificationItemView({
       href={item.href}
       title={item.name[lang]}
       subtitle={item.issuer[lang]}
-      trailing={formatDate(item.date)}
+      trailing={formatDate(item.date, lang)}
     />
   );
 }
