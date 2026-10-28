@@ -11,11 +11,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const metaByLang: Record<Locale, { title: string; description: string }> = {
   ko: {
     title: "sid12g • 조성민",
-    description: "안녕하세요, 프로덕트 엔지니어 조성민입니다.",
+    description: "안녕하세요, 개발자 조성민입니다.",
   },
   en: {
     title: "sid12g • Sungmin Cho",
-    description: "Hi, I'm Sungmin Cho, a product engineer.",
+    description: "Hi, I'm Sungmin Cho, a developer.",
   },
 };
 

@@ -22,7 +22,7 @@ export const dictionaries = {
     },
     profile: {
       name: "조성민",
-      role: "Product Engineer",
+      role: "Frontend Developer",
       viewProjects: "프로젝트 보기",
       goToBlog: "블로그로 이동",
     },
@@ -36,7 +36,7 @@ export const dictionaries = {
       paragraphs: [
         [
           { text: "안녕하세요, " },
-          { text: "프로덕트 엔지니어 " },
+          { text: "프론트엔드 개발자 " },
           { text: "조성민", bold: true },
           { text: "입니다." },
         ],
@@ -142,7 +142,7 @@ export const dictionaries = {
     },
     profile: {
       name: "Sungmin Cho",
-      role: "Product Engineer",
+      role: "Frontend Developer",
       viewProjects: "View Projects",
       goToBlog: "Read the Blog",
     },
@@ -157,7 +157,7 @@ export const dictionaries = {
         [
           { text: "Hello, I'm " },
           { text: "Sungmin Cho", bold: true },
-          { text: ", a product engineer." },
+          { text: ", a frontend developer." },
         ],
         [
           {
