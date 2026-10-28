@@ -1,0 +1,84 @@
+---
+title: UOS Big Data MD Type Test
+description: A micro-degree type test for the University of Seoul's 2026 major fair booth
+image: /projects/bigdata-mdtest/thumbnail.png
+logo: /projects/bigdata-mdtest/logo.png
+preview: /projects/bigdata-mdtest/preview.png
+team: Personal
+date: 2026
+source: https://github.com/SID12g/uos-bigdata-mdtest
+stacks: React, Vite
+order: 13
+---
+
+> This project is the big data micro-degree (MD) type test app used at a booth run by the University of Seoul Big Data Innovation Convergence University Program at the university's 2026 major fair.
+
+### 1. Overview
+
+The Big Data Innovation Convergence University Program runs micro-degree (MD) courses, which certify students who complete a designated set of courses.
+
+There are six standard big data MDs alone — Big Data Basic, Big Data Management, Big Data Analysis, Machine Learning, Big Data Mining, and Big Data Advanced — plus 16 department-specific linked convergence MDs on top of that.
+
+But the details — which courses count toward which MD, substitute courses, old course numbers, and whether a course is offered this semester — were scattered across a guide PDF more than 30 pages long, which made it hard for students to figure out which MD suited them on their own.
+
+So I built a mobile web test that students could open right away from a QR code at the booth, get an MD recommendation within two minutes, and see which courses to take next.
+
+The test can be taken in one of two ways.
+
+| Mode           | For                                                           | How it recommends                                                                                         |
+| -------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Interest-based | Underclassmen and non-majors who haven't taken any courses yet | Calculates readiness and interest scores from 8 scenario-based questions to recommend an MD               |
+| Course-based   | Upperclassmen and majors who have already taken related courses | Calculates progress (n/4) for each MD from the courses checked, and recommends the one quickest to finish |
+
+The result screen shows the recommended MD along with a roadmap of remaining courses, MDs that can be earned together with just a few more courses, progress toward the student's department-linked MD, and how to apply.
+
+### 2. System Architecture
+
+I built this project with `React`, `Vite`, and `TypeScript`, and styled it with CSS variable tokens and `CSS Modules`.
+
+Everything runs in the browser, with no login, no server, and no personal data collected, and all state is managed with a single `useReducer` instead of a separate state library.
+
+Since MD eligibility has to be determined by course number rather than course name, I organized the course data into "slots," each grouping a main course with its substitute courses and old course numbers.
+
+The six standard MDs come down to 26 slots in total, and a single slot can count toward several MDs at once.
+
+```json
+{ "id": "dl", "name": "딥러닝", "main": "47768", "md": ["분석", "머신러닝", "마이닝"], "group": "ai" }
+```
+
+Courses, slots, questions, and linked convergence MD data all live in separate JSON files so that no course numbers are hard-coded. When the semester changes, only the list of offered courses in `term.json` needs to be replaced, so the app can keep being used semester after semester, well beyond the event.
+
+The "MDs to earn together" feature pairs the recommended MD with each other MD and finds the minimum number of additional courses needed to bring both to 4/4. With only 20 on-campus slots, an exhaustive search over combinations is more than fast enough, so I implemented it to check every combination while increasing the course count k one at a time.
+
+```ts
+for (let k = Math.max(needA, needB); k <= cand.length; k++) {
+  let best: Slot[] | null = null
+  let bestScore = -1
+  for (const c of combos(cand, k)) {
+    if (c.filter((s) => s.md.includes(a)).length < needA) continue
+    if (c.filter((s) => s.md.includes(b)).length < needB) continue
+    const score = c.filter((s) => tierOf(s) === 0).length * 10 + c.reduce((n, s) => n + s.md.length, 0)
+    if (score > bestScore) {
+      best = c
+      bestScore = score
+    }
+  }
+  if (best) return { k, needA, needB, slots: [...best].sort(recSort) }
+}
+```
+
+I wrote the matching logic as pure functions separate from React and covered it with golden tests in `Vitest`. For the interest-based mode, I exhaustively computed all 65,536 (4⁸) answer combinations to verify that the six results come out evenly, each between 15.0% and 18.8%.
+
+Beyond that, I used `html-to-image` so users can save their result card as an image, and tracked user counts and events with `Google Analytics`.
+
+### 3. Retrospective
+
+Rather than jumping straight into development, I first wrote a planning document covering the screen flow, questions and scoring, result screen, and edge cases, along with a document of implementation rules. I then validated the matching logic with an HTML prototype and developed the app together with a coding agent.
+
+Having the plan and rules written down gave me a clear standard for reviewing what the agent produced, and the golden tests let me immediately check that the matching logic hadn't broken as I wired up the screens.
+
+While moving the PDF guide into data, I also found five places where things didn't line up — the same course listed with different numbers on different pages, or mismatched department and MD names — plus one rule the PDF never defined.
+
+Instead of making those calls myself, I organized them into a list to confirm with the program, each with a temporary handling, and it taught me that for a service that delivers results based on data, verifying the source material matters just as much as development.
+
+Finally, since the test result is only ever a recommendation, I made sure the result screen always states that final recognition is confirmed by the program based on course numbers. It taught me that when building a service that delivers information to users, it's just as important to make clear the limits of what the service can stand behind.
