@@ -1,0 +1,93 @@
+---
+title: AI Usage Gauge
+description: Claude와 ChatGPT(Codex)의 남은 사용 한도를 상태 표시줄에 보여주는 VS Code 확장
+image: /projects/ai-usage-guage/thumbnail.png
+logo: /projects/ai-usage-guage/logo.png
+preview: /projects/ai-usage-guage/preview.png
+team: Personal
+date: 2026
+source: https://github.com/SID12g/ai-usage-gauge
+stacks: JavaScript, VS Code Extension API
+order: 14
+---
+
+### 1. 개요
+
+본 프로젝트는 Claude와 ChatGPT(Codex)의 사용 한도가 얼마나 남았는지 VS Code 상태 표시줄에서 바로 보여주는 확장입니다.
+
+Claude Code와 Codex는 모두 5시간 한도와 주간 한도를 두고 있어, 두 도구를 함께 쓰다 보면 어느 쪽 한도가 얼마나 남았는지 자주 확인하게 됩니다. 하지만 이를 확인하려면 에디터를 벗어나 서비스별 사용량 페이지나 CLI 명령어로 따로 확인해야 했습니다.
+
+그래서 두 서비스의 남은 사용량을 상태 표시줄 오른쪽 끝에 나란히 띄워, 코드를 작성하면서 한눈에 확인할 수 있도록 하였습니다. 사용량은 쓴 양이 아니라 남은 양으로 표시하며, 별도 로그인 없이 이미 로그인된 Claude Code와 Codex CLI 계정을 그대로 사용합니다.
+
+| 표시               | 의미                                        |
+| ------------------ | ------------------------------------------- |
+| `5h 78%`           | 5시간 한도가 78% 남음                       |
+| `7d 55%`           | 주간 한도가 55% 남음                        |
+| 경고 아이콘과 배경 | 표시된 한도 중 하나가 25% 이하              |
+| 오류 아이콘과 배경 | 표시된 한도 중 하나가 10% 이하이거나 소진됨 |
+
+항목에 마우스를 올리면 Opus, Sonnet 같은 모델별 주간 한도까지 모든 한도의 남은 양과 초기화까지 남은 시간, 사용 중인 플랜을 툴팁으로 보여주며, UI는 VS Code 표시 언어에 따라 영어와 한국어를 지원합니다.
+
+확장은 VS Code Marketplace와 함께 Open VSX에도 배포하여, Open VSX를 사용하는 다른 VS Code 기반 에디터에서도 설치할 수 있도록 하였습니다.
+
+### 2. 시스템 구성
+
+본 프로젝트는 `JavaScript`와 `VS Code Extension API`로 개발하였으며, 런타임 의존성이나 번들러 없이 `extension.js` 파일 하나로 구성하였습니다. 별도 서버 없이 사용자 컴퓨터에서만 동작하며, 사용 통계도 수집하지 않습니다.
+
+Claude 사용량은 Claude Code가 저장해 둔 로그인 토큰으로 Anthropic 사용량 API를 조회하여 가져옵니다. 토큰은 macOS 키체인에서 먼저 찾고, 없으면 `~/.claude/.credentials.json`에서 읽으며, `api.anthropic.com`으로만 전송할 뿐 화면이나 로그, 캐시에는 남기지 않도록 하였습니다.
+
+토큰이 만료된 경우에도 확장이 직접 토큰을 갱신하지는 않습니다. 확장에서 토큰을 갱신하면 Claude Code의 리프레시 토큰이 교체되어 Claude Code 로그인이 풀릴 수 있기 때문에, 갱신은 Claude Code에 맡기고 툴팁으로 `claude`를 한 번 실행하라고 안내하도록 하였습니다.
+
+ChatGPT 사용량은 설치된 `codex app-server`를 자식 프로세스로 실행하고, 표준 입출력으로 JSON-RPC 메시지를 주고받아 가져옵니다. 인증은 Codex CLI가 처리하기 때문에 확장은 OpenAI 토큰을 직접 읽지 않습니다.
+
+```js
+const messages = [
+  {
+    id: 0,
+    method: "initialize",
+    params: { clientInfo: { name: "ai_usage_statusbar", version: "0.1" } },
+  },
+  { method: "initialized" },
+  ...Object.entries(calls).map(([id, [method, params]]) =>
+    params === null
+      ? { id: Number(id), method }
+      : { id: Number(id), method, params },
+  ),
+];
+child.stdin.write(messages.map((m) => JSON.stringify(m) + "\n").join(""));
+```
+
+이때 Dock에서 실행한 VS Code는 셸의 `PATH`를 물려받지 못해 `codex`를 찾지 못할 수 있기 때문에, Homebrew, pnpm, Bun, Volta 등 자주 쓰이는 설치 경로를 탐색 경로에 추가하고 `aiUsage.codexPath` 설정으로 직접 지정할 수도 있도록 하였습니다.
+
+두 서비스의 응답 형식이 서로 다르기 때문에, 각 한도를 이름, 상태 표시줄용 짧은 이름, 사용률, 초기화 시각을 담은 공통 형태로 변환한 뒤 같은 방식으로 표시하도록 하였습니다. Claude 응답에 미리 알지 못한 한도가 내려오더라도 키 이름을 그대로 라벨로 써서 툴팁에 보여주기 때문에, 새로운 한도가 생겨도 확장을 업데이트하지 않고 확인할 수 있습니다.
+
+VS Code 확장은 열려 있는 창마다 따로 실행되기 때문에, 창이 여러 개면 같은 API를 창 수만큼 호출하게 됩니다. 이를 막기 위해 조회 결과를 확장 전역 저장소의 캐시 파일에 기록하고, 다른 창에서는 조회 간격 안의 결과가 있으면 API를 호출하지 않고 그 결과를 그대로 쓰도록 하였습니다.
+
+```js
+const cache = await readCache(cacheFile);
+const maxAge = intervalMs() - 5000;
+const enabled = SOURCES.filter((s) => config().get(s.setting, true));
+await Promise.all(
+  enabled.map(async (source) => {
+    const cached = cache[source.id];
+    if (!force && cached && Date.now() - cached.at < maxAge) {
+      results[source.id] = cached;
+      return;
+    }
+    results[source.id] = cache[source.id] = await load(source);
+  }),
+);
+await writeCache(cacheFile, cache);
+```
+
+사용량은 기본 2분마다 조회하며, 30초마다 툴팁의 남은 시간을 갱신하다가 한도의 초기화 시각이 지나면 바로 다시 조회합니다.
+
+이 외에 Claude와 ChatGPT 로고를 아이콘 폰트(`woff`)로 만들어 상태 표시줄 아이콘으로 등록하였고, 두 항목의 우선순위를 `-1000`과 `-1000.001`로 두어 상태 표시줄 오른쪽 끝에 붙어 있으면서 다른 확장의 항목이 사이에 끼어들지 않도록 하였습니다. 또한 상태 표시줄에는 로고만 보이기 때문에, 화면 낭독기에서는 서비스 이름까지 읽히도록 접근성 라벨을 따로 지정하였습니다.
+
+### 3. 프로젝트 회고
+
+본 프로젝트는 다른 도구의 로그인 정보를 빌려 쓰는 확장이었기 때문에, 기능을 추가하는 것보다 확장이 하지 않을 일을 정하는 것이 더 중요했습니다.
+
+토큰을 저장하지 않고, 만료된 토큰을 직접 갱신하지 않으며, Codex의 인증은 CLI에 맡기는 식으로 원래 도구의 동작을 건드리지 않는 범위 안에서만 동작하도록 설계하였습니다. 사용자의 인증 정보를 다루는 서비스를 만들 때는 할 수 있는 일보다 하지 말아야 할 일을 먼저 정해야 한다는 것을 배울 수 있었습니다.
+
+마지막으로 VS Code Marketplace와 Open VSX에 확장을 배포하면서, 기능 구현 외에도 다국어 번들과 마켓플레이스 소개 문서, 변경 이력, 문제 해결 안내까지 준비해야 했습니다. Dock에서 실행한 VS Code가 셸의 `PATH`를 보지 못하는 문제처럼 사용자 환경에 따라 달라지는 부분까지 고려하며, 다른 사람이 설치해서 쓰는 도구를 만든다는 것은 기능을 완성한 이후의 일까지 포함한다는 것을 배울 수 있었습니다.
