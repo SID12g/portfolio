@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AutoHideHeader from "@/components/AutoHideHeader";
 import HeaderNav from "@/components/HeaderNav";
 import { ArrowUpRightIcon } from "@/components/icons";
 import { localizePath, type Locale } from "@/i18n/config";
@@ -25,7 +26,7 @@ export default function Header({
   const home = localizePath(lang, "/");
 
   return (
-    <header className="sticky top-4 z-50 mb-11 flex justify-center px-6 sm:mb-[60px]">
+    <AutoHideHeader>
       <nav className="flex w-full items-center justify-between gap-4 rounded-full border border-faint bg-background px-3 py-2 md:w-fit md:justify-start md:gap-10">
         <Link
           href={home}
@@ -51,6 +52,6 @@ export default function Header({
           <ArrowUpRightIcon className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </nav>
-    </header>
+    </AutoHideHeader>
   );
 }
