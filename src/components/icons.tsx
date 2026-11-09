@@ -27,34 +27,6 @@ export const ArrowLeftIcon = ({ className }: IconProps) => (
   <Icon src="/icons/arrow-left.svg" className={className} />
 );
 
-export const CodeIcon = ({ className }: IconProps) => (
-  <Icon src="/icons/code.svg" className={className} />
-);
-
-export const CalendarIcon = ({ className }: IconProps) => (
-  <Icon src="/icons/calendar.svg" className={className} />
-);
-
-export const UsersIcon = ({ className }: IconProps) => (
-  <Icon src="/icons/users.svg" className={className} />
-);
-
-export const GitPullRequestIcon = ({ className }: IconProps) => (
-  <Icon src="/icons/git-pull-request.svg" className={className} />
-);
-
-export const GlobeIcon = ({ className }: IconProps) => (
-  <Icon src="/icons/globe.svg" className={className} />
-);
-
 export const FileIcon = ({ className }: IconProps) => (
   <Icon src="/icons/file.svg" className={className} />
-);
-
-export const MailIcon = ({ className }: IconProps) => (
-  <Icon src="/icons/mail.svg" className={className} />
-);
-
-export const GitHubIcon = ({ className }: IconProps) => (
-  <Icon src="/icons/github.svg" className={className} />
 );
