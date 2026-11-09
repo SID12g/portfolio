@@ -124,7 +124,8 @@ export default async function ProjectPage({
                   <li key={stack} className="flex">
                     <Link
                       href={`${localizePath(lang, "/projects")}?tag=${encodeURIComponent(stack)}`}
-                      className={`${chipClass} bg-invert-bg text-invert-fg transition-colors duration-150 hover:bg-invert-hover`}
+                      data-cursor="lift"
+                      className={`${chipClass} bg-invert-bg text-invert-fg transition-colors duration-150 [--lift-scale:1.05] hover:bg-invert-hover`}
                     >
                       {stack}
                     </Link>

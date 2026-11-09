@@ -120,7 +120,9 @@ function ProjectListView({
           <Link
             key={project.slug}
             href={localizePath(lang, `/projects/${project.slug}`)}
-            className="group flex flex-col gap-4"
+            data-cursor="lift"
+            // 떠오를 때 카드 배경이 생기도록 여백을 주고, 음수 margin으로 그리드 위치는 유지
+            className="group -m-2.5 flex flex-col gap-4 rounded-2xl p-2.5 [--lift-scale:1.015] hover:bg-elevated"
           >
             <div className="relative aspect-square overflow-hidden rounded-lg bg-surface">
               <Image
@@ -134,9 +136,7 @@ function ProjectListView({
             <div className="flex flex-col gap-3">
               {/* 줄바꿈 시 줄 간격을 위해 leading 1.4를 주고, 음수 margin으로 한 줄일 때 높이는 leading 1.2와 같게 유지 */}
               <div className="flex flex-col gap-1.5 text-sm leading-[1.4] break-keep *:-my-[0.1em]">
-                <p className="font-medium text-primary transition-colors duration-150 group-hover:text-secondary">
-                  {project.title}
-                </p>
+                <p className="font-medium text-primary">{project.title}</p>
                 <p className="text-secondary">{project.description}</p>
               </div>
               <p className="flex flex-wrap gap-x-2.5 gap-y-1 text-xs leading-[1.4] font-medium text-tertiary">
@@ -168,7 +168,8 @@ function TagTab({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`${chipClass} shrink-0 cursor-pointer transition-colors duration-150 ${
+      data-cursor="lift"
+      className={`${chipClass} shrink-0 [--lift-scale:1.05] cursor-pointer transition-colors duration-150 ${
         active
           ? "bg-invert-bg text-invert-fg"
           : "bg-surface text-secondary hover:bg-surface-strong hover:text-primary"
@@ -280,7 +281,7 @@ function DragScroller({
         }
       }}
       onDragStart={(e) => e.preventDefault()}
-      className={`relative -mx-6 flex items-center gap-2 overflow-x-auto overscroll-x-contain px-6 select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${mask} ${
+      className={`relative -mx-6 -my-3 flex items-center gap-2 overflow-x-auto overscroll-x-contain px-6 py-3 select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${mask} ${
         dragging ? "cursor-grabbing *:cursor-grabbing" : ""
       }`}
     >

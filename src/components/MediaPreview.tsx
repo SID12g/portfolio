@@ -97,7 +97,7 @@ function toEmbedUrl(url: string): string {
 }
 
 const tileClass =
-  "group relative flex aspect-[4/3] w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-line bg-surface text-left transition-colors duration-150 hover:bg-surface-strong";
+  "group relative flex aspect-[4/3] w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-line bg-surface text-left transition-colors duration-150 hover:bg-elevated";
 
 function DocumentTile({
   item,
@@ -153,6 +153,7 @@ export function MediaGallery({
               href={item.src}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="lift"
               className={tileClass}
             >
               <DocumentTile item={item} label={dict.link} />
@@ -162,6 +163,7 @@ export function MediaGallery({
               key={item.src}
               type="button"
               onClick={() => isPreviewable(item) && open(item)}
+              data-cursor="lift"
               className={tileClass}
               aria-label={item.name}
             >

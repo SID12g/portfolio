@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import { jetBrainsMono, pretendard } from "../fonts";
+import Cursor from "@/components/Cursor";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { locales, type Locale } from "@/i18n/config";
@@ -75,6 +76,7 @@ export default async function RootLayout({
       <body>
         <Analytics />
         <SpeedInsights />
+        <Cursor />
         {/* 헤더 위 여백만큼 스크롤하면 헤더가 상단에 붙음 (헤더 자체 여백 16px 포함해 처음 위치는 기존과 같음) */}
         <div className="flex min-h-screen flex-col pt-6 sm:pt-10">
           <Header lang={lang} />

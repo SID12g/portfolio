@@ -8,6 +8,10 @@
   --color-line: rgb(22 22 22 / 0.1);
   --color-surface: rgb(22 22 22 / 0.04);
   --color-surface-strong: rgb(22 22 22 / 0.08);
+  --color-elevated: #ffffff;
+  --shadow-lift:
+    0 1px 2px rgb(0 0 0 / 0.04), 0 2px 4px rgb(0 0 0 / 0.03),
+    0 6px 16px rgb(0 0 0 / 0.05);
 
   --color-invert-bg: #161616;
   --color-invert-hover: #333333;
@@ -24,6 +28,9 @@
     --color-line: rgb(237 237 237 / 0.1);
     --color-surface: rgb(237 237 237 / 0.05);
     --color-surface-strong: rgb(237 237 237 / 0.1);
+    --color-elevated: #1c1c1c;
+    --shadow-lift:
+      0 0 0 1px rgb(237 237 237 / 0.06), 0 6px 16px rgb(0 0 0 / 0.4);
 
     --color-invert-bg: #ededed;
     --color-invert-hover: #cccccc;
@@ -40,6 +47,7 @@
   --color-line: var(--color-line);
   --color-surface: var(--color-surface);
   --color-surface-strong: var(--color-surface-strong);
+  --color-elevated: var(--color-elevated);
 
   --color-invert-bg: var(--color-invert-bg);
   --color-invert-hover: var(--color-invert-hover);
@@ -82,6 +90,84 @@ html {
 @keyframes site-header-divider {
   to {
     border-bottom-color: var(--color-line);
+  }
+}
+
+/* 커스텀 커서: 바깥 요소는 위치만, 안쪽 요소는 모양만 담당
+   difference 블렌드로 밝은 배경·어두운 배경(라이트박스 등) 어디서나 보이게 함 */
+.site-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.site-cursor-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #ffffff;
+  opacity: 0.4;
+  translate: -50% -50%;
+  transition-property: width, height, border-radius, opacity, scale;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.site-cursor[data-mode="link"] .site-cursor-shape {
+  width: 28px;
+  height: 28px;
+  opacity: 0.16;
+}
+
+.site-cursor[data-mode="text"] .site-cursor-shape {
+  width: 2px;
+  height: var(--cursor-caret, 20px);
+  border-radius: 1px;
+  opacity: 0.5;
+}
+
+.site-cursor[data-mode="lift"] .site-cursor-shape {
+  opacity: 0;
+  scale: 0;
+}
+
+.site-cursor[data-pressed] .site-cursor-shape {
+  scale: 0.8;
+}
+
+.site-cursor[data-hidden] .site-cursor-shape {
+  opacity: 0;
+}
+
+html[data-custom-cursor],
+html[data-custom-cursor] * {
+  cursor: none !important;
+}
+
+/* 커서를 올리면 요소 자체가 살짝 떠오름 (커스텀 커서는 이 위에서 숨겨짐) */
+@media (hover: hover) {
+  [data-cursor="lift"] {
+    transition-property:
+      scale, box-shadow, background-color, color, border-color, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  [data-cursor="lift"]:hover {
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  [data-cursor="lift"]:hover {
+    scale: var(--lift-scale, 1.02);
   }
 }
 

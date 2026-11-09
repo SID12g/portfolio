@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { jetBrainsMono, pretendard } from "./fonts";
+import Cursor from "@/components/Cursor";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import NotFoundView from "@/components/NotFoundView";
@@ -29,6 +30,7 @@ export default async function GlobalNotFound() {
           httpEquiv="refresh"
           content={`${REDIRECT_SECONDS + 1};url=${localizePath(lang, "/")}`}
         />
+        <Cursor />
         <div className="flex min-h-screen flex-col pt-6 sm:pt-10">
           <Header lang={lang} />
           <div className="mx-auto flex w-full max-w-[648px] flex-1 flex-col gap-[60px] px-6 pt-11 pb-14">

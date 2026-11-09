@@ -42,6 +42,7 @@ export default function NotFoundView({
         {/* JS가 로드되지 않아도 이동할 수 있도록 일반 링크 사용 */}
         <a
           href={home}
+          data-cursor="lift"
           className="rounded-lg bg-invert-bg px-3 py-1.5 text-xs leading-[normal] font-medium text-invert-fg transition-colors duration-150 hover:bg-invert-hover"
         >
           {dict.button}
