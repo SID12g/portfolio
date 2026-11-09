@@ -9,9 +9,18 @@ export const pretendard = localFont({
 });
 
 export const jetBrainsMono = localFont({
-  src: "./fonts/JetBrainsMono-Medium.woff2",
+  src: [
+    {
+      path: "./fonts/JetBrainsMono-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/JetBrainsMono-SemiBold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+  ],
   variable: "--font-jetbrains-mono",
-  weight: "500",
-  style: "normal",
   display: "swap",
 });
