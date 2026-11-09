@@ -19,7 +19,7 @@ export default function Footer({ lang }: { lang: Locale }) {
     <footer className="flex flex-col gap-5">
       <Divider />
       <div className="flex items-center justify-between gap-4">
-        <p className="text-xs leading-none text-secondary">
+        <p className="text-sm leading-none text-secondary">
           © {year} sid12g - Sungmin Cho
         </p>
         <div className="flex items-center gap-5">
