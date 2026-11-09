@@ -29,12 +29,14 @@ export default async function GlobalNotFound() {
           httpEquiv="refresh"
           content={`${REDIRECT_SECONDS + 1};url=${localizePath(lang, "/")}`}
         />
-        <div className="mx-auto flex min-h-screen w-full max-w-[648px] flex-col gap-[60px] px-6 pt-10 pb-14 sm:pt-14">
+        <div className="flex min-h-screen flex-col pt-6 sm:pt-10">
           <Header lang={lang} />
-          <main className="flex flex-1 flex-col justify-center py-10">
-            <NotFoundView lang={lang} seconds={REDIRECT_SECONDS} />
-          </main>
-          <Footer lang={lang} />
+          <div className="mx-auto flex w-full max-w-[648px] flex-1 flex-col gap-[60px] px-6 pt-11 pb-14">
+            <main className="flex flex-1 flex-col justify-center py-10">
+              <NotFoundView lang={lang} seconds={REDIRECT_SECONDS} />
+            </main>
+            <Footer lang={lang} />
+          </div>
         </div>
       </body>
     </html>

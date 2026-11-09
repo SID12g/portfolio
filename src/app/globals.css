@@ -56,7 +56,8 @@
 html {
   background: var(--color-background);
   color: var(--color-primary);
-  scroll-padding-top: 40px;
+  /* 상단 고정 헤더에 가려지지 않도록 (모바일에서 헤더가 두 줄이 되는 경우 포함) */
+  scroll-padding-top: 96px;
   font-family:
     var(--font-pretendard), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -66,6 +67,21 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* 스크롤하면 고정 헤더 아래에 구분선이 서서히 나타남 (미지원 브라우저는 구분선 없이 표시) */
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: site-header-divider linear both;
+    animation-timeline: scroll();
+    animation-range: 0 48px;
+  }
+}
+
+@keyframes site-header-divider {
+  to {
+    border-bottom-color: var(--color-line);
   }
 }
 

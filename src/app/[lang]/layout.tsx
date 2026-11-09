@@ -75,10 +75,13 @@ export default async function RootLayout({
       <body>
         <Analytics />
         <SpeedInsights />
-        <div className="mx-auto flex min-h-screen w-full max-w-[648px] flex-col gap-[60px] px-6 pt-10 pb-14 sm:pt-14">
+        {/* 헤더 위 여백만큼 스크롤하면 헤더가 상단에 붙음 (헤더 자체 여백 16px 포함해 처음 위치는 기존과 같음) */}
+        <div className="flex min-h-screen flex-col pt-6 sm:pt-10">
           <Header lang={lang} />
-          <main className="flex-1">{children}</main>
-          <Footer lang={lang} />
+          <div className="mx-auto flex w-full max-w-[648px] flex-1 flex-col gap-[60px] px-6 pt-11 pb-14">
+            <main className="flex-1">{children}</main>
+            <Footer lang={lang} />
+          </div>
         </div>
       </body>
 
