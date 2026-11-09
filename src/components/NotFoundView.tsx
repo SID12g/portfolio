@@ -26,27 +26,29 @@ export default function NotFoundView({
   }, [count, home]);
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex flex-col gap-4">
-        <p className="text-sm leading-none font-medium text-nav-inactive">
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-3">
+        <p className="font-mono text-sm leading-[1.2] font-medium text-tertiary">
           404
         </p>
-        <h1 className="text-[40px] leading-[1.2] font-bold">{dict.title}</h1>
-        <p className="text-base leading-[1.7] font-medium text-muted">
+        <h1 className="text-lg leading-[1.2] font-semibold text-primary">
+          {dict.title}
+        </h1>
+        <p className="text-sm leading-[1.7] text-secondary">
           {dict.description}
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
         {/* JS가 로드되지 않아도 이동할 수 있도록 일반 링크 사용 */}
         <a
           href={home}
-          className="flex items-center justify-center rounded-full border border-invert-bg bg-invert-bg px-5 py-3.5 text-sm leading-none font-medium text-invert-fg transition-colors duration-150 hover:border-invert-hover hover:bg-invert-hover"
+          className="rounded-lg bg-invert-bg px-3 py-1.5 text-xs leading-[normal] font-medium text-invert-fg transition-colors duration-150 hover:bg-invert-hover"
         >
           {dict.button}
         </a>
         <p
           aria-live="polite"
-          className="text-sm leading-none font-medium text-nav-inactive tabular-nums"
+          className="text-xs leading-[1.2] font-medium text-tertiary tabular-nums"
         >
           {dict.countdown(count)}
         </p>

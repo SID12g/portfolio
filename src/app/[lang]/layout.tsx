@@ -52,8 +52,8 @@ export async function generateMetadata({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0d0d" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f7f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
   ],
 };
 
@@ -75,11 +75,9 @@ export default async function RootLayout({
       <body>
         <Analytics />
         <SpeedInsights />
-        <div className="flex min-h-screen flex-col pt-6 sm:pt-[60px]">
+        <div className="mx-auto flex min-h-screen w-full max-w-[648px] flex-col gap-[60px] px-6 pt-10 pb-14 sm:pt-14">
           <Header lang={lang} />
-          <main className="mx-auto w-full max-w-[768px] flex-1 px-6">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
           <Footer lang={lang} />
         </div>
       </body>
