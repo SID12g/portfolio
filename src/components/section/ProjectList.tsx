@@ -136,14 +136,19 @@ function ProjectListView({
             <div className="flex flex-col gap-3">
               {/* 줄바꿈 시 줄 간격을 위해 leading 1.4를 주고, 음수 margin으로 한 줄일 때 높이는 leading 1.2와 같게 유지 */}
               <div className="flex flex-col gap-1.5 text-sm leading-[1.4] break-keep *:-my-[0.1em]">
-                <p className="font-medium text-primary">{project.title}</p>
+                <p className="font-semibold text-primary">{project.title}</p>
                 <p className="text-secondary">{project.description}</p>
               </div>
-              <p className="flex flex-wrap gap-x-2.5 gap-y-1 text-xs leading-[1.4] font-medium text-tertiary">
+              <ul className="flex flex-wrap gap-1.5">
                 {project.stacks.map((stack) => (
-                  <span key={stack}>{stack}</span>
+                  <li
+                    key={stack}
+                    className="rounded-md bg-surface-strong px-2 py-1 text-xs leading-none font-medium text-secondary"
+                  >
+                    {stack}
+                  </li>
                 ))}
-              </p>
+              </ul>
             </div>
           </Link>
         ))}

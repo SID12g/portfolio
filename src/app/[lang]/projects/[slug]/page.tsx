@@ -98,10 +98,11 @@ export default async function ProjectPage({
           </div>
         </div>
 
-        <dl className="flex flex-col gap-5 text-sm leading-[1.2]">
+        {/* 본문과 구분되도록 테두리로 묶고, 행마다 구분선을 넣어 한눈에 훑어볼 수 있게 함 */}
+        <dl className="flex flex-col divide-y divide-line rounded-xl border border-line text-sm leading-[1.2]">
           {details.map(({ label, value }) => (
             <DetailRow key={label} label={label}>
-              <span className="text-primary">{value}</span>
+              <span className="font-medium text-primary">{value}</span>
             </DetailRow>
           ))}
           {source && (
@@ -110,7 +111,7 @@ export default async function ProjectPage({
                 href={meta.source}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex min-w-0 items-center gap-1 text-primary underline decoration-line decoration-1 underline-offset-4 transition-colors duration-150 hover:decoration-current"
+                className="group flex min-w-0 items-center gap-1 font-medium text-primary underline decoration-line decoration-1 underline-offset-4 transition-colors duration-150 hover:decoration-current"
               >
                 <span className="truncate">{source}</span>
                 <ArrowUpRightIcon className="size-3 shrink-0 text-secondary transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -118,7 +119,7 @@ export default async function ProjectPage({
             </DetailRow>
           )}
           {stacks.length > 0 && (
-            <DetailRow label={dict.stack}>
+            <DetailRow label={dict.stack} className="py-3">
               <ul className="flex flex-wrap gap-x-2 gap-y-2.5">
                 {stacks.map((stack) => (
                   <li key={stack} className="flex">
@@ -163,14 +164,17 @@ export default async function ProjectPage({
 
 function DetailRow({
   label,
+  className = "py-4",
   children,
 }: {
   label: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-6 sm:gap-10">
-      <dt className="w-16 shrink-0 text-secondary sm:w-[100px]">{label}</dt>
+    // 스택 칩처럼 높이가 다른 값도 첫 줄 글자 기준선에 라벨을 맞춤
+    <div className={`flex items-baseline gap-6 px-4 sm:gap-10 sm:px-5 ${className}`}>
+      <dt className="w-14 shrink-0 text-secondary sm:w-20">{label}</dt>
       <dd className="flex min-w-0 flex-1">{children}</dd>
     </div>
   );
