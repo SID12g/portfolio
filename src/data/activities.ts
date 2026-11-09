@@ -4,8 +4,6 @@ export interface ActivityItem {
   role: Record<Locale, string>;
   organization: Record<Locale, string>;
   href: string;
-  icon: string;
-  iconRounded?: boolean;
   start: string;
   end?: string;
 }
@@ -15,8 +13,6 @@ export const activities: ActivityItem[] = [
     role: { ko: "Frontend Developer", en: "Frontend Developer" },
     organization: { ko: "Fingoo", en: "Fingoo" },
     href: "https://fingoo.vercel.app",
-    icon: "/images/logos/fingoo.svg",
-    iconRounded: true,
     start: "2026-05",
   },
   {
@@ -26,7 +22,6 @@ export const activities: ActivityItem[] = [
       en: "University of Seoul BigData University",
     },
     href: "https://bigdatahub.ac.kr",
-    icon: "/images/logos/coss.svg",
     start: "2026-04",
   },
 ];
