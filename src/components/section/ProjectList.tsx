@@ -10,6 +10,7 @@ import {
   type PointerEvent,
   type ReactNode,
 } from "react";
+import { chipClass } from "@/components/Chip";
 import { localizePath, type Locale } from "@/i18n/config";
 
 export interface ProjectListItem {
@@ -93,7 +94,7 @@ function ProjectListView({
   };
 
   return (
-    <div className="flex w-full flex-col gap-[60px]">
+    <div className="flex w-full flex-col gap-8">
       <DragScroller activeKey={active?.label ?? null}>
         <TagTab
           label={allLabel}
@@ -114,32 +115,31 @@ function ProjectListView({
           />
         ))}
       </DragScroller>
-      <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2">
         {filtered.map((project) => (
           <Link
             key={project.slug}
             href={localizePath(lang, `/projects/${project.slug}`)}
             className="group flex flex-col gap-4"
           >
-            <div className="relative aspect-square overflow-hidden rounded-md bg-muted-5">
+            <div className="relative aspect-square overflow-hidden rounded-lg bg-surface">
               <Image
                 src={project.preview}
                 alt=""
                 fill
-                sizes="(min-width: 768px) 348px, (min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 640px) 290px, 100vw"
                 className="object-cover mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-[1.03] dark:mix-blend-normal"
               />
             </div>
             <div className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1">
-                <p className="text-[17px] leading-snug font-medium transition-colors duration-150 group-hover:text-muted">
+              {/* 줄바꿈 시 줄 간격을 위해 leading 1.4를 주고, 음수 margin으로 한 줄일 때 높이는 leading 1.2와 같게 유지 */}
+              <div className="flex flex-col gap-1.5 text-sm leading-[1.4] break-keep *:-my-[0.1em]">
+                <p className="font-medium text-primary transition-colors duration-150 group-hover:text-secondary">
                   {project.title}
                 </p>
-                <p className="text-sm leading-normal font-medium text-muted">
-                  {project.description}
-                </p>
+                <p className="text-secondary">{project.description}</p>
               </div>
-              <p className="flex flex-wrap gap-x-3 gap-y-1 text-sm leading-normal font-medium text-muted">
+              <p className="flex flex-wrap gap-x-2.5 gap-y-1 text-xs leading-[1.4] font-medium text-tertiary">
                 {project.stacks.map((stack) => (
                   <span key={stack}>{stack}</span>
                 ))}
@@ -168,11 +168,13 @@ function TagTab({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`shrink-0 cursor-pointer py-2 text-base leading-none font-medium whitespace-nowrap transition-colors duration-150 ${
-        active ? "text-primary" : "text-nav-inactive hover:text-muted"
+      className={`${chipClass} shrink-0 cursor-pointer transition-colors duration-150 ${
+        active
+          ? "bg-invert-bg text-invert-fg"
+          : "bg-surface text-secondary hover:bg-surface-strong hover:text-primary"
       }`}
     >
-      {label} <span className="tabular-nums">({count})</span>
+      {label} <span className="tabular-nums opacity-60">{count}</span>
     </button>
   );
 }
@@ -278,7 +280,7 @@ function DragScroller({
         }
       }}
       onDragStart={(e) => e.preventDefault()}
-      className={`relative -mx-6 -my-2 flex items-center gap-5 overflow-x-auto overscroll-x-contain px-6 select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${mask} ${
+      className={`relative -mx-6 flex items-center gap-2 overflow-x-auto overscroll-x-contain px-6 select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${mask} ${
         dragging ? "cursor-grabbing *:cursor-grabbing" : ""
       }`}
     >

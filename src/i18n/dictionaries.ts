@@ -8,9 +8,6 @@ export interface IntroSegment {
 
 export const dictionaries = {
   ko: {
-    nav: {
-      contact: "연락하기",
-    },
     sections: {
       intro: "인트로",
       education: "학력",
@@ -18,13 +15,6 @@ export const dictionaries = {
       certifications: "자격증",
       stack: "스택",
       contributions: "기여",
-      links: "링크",
-    },
-    profile: {
-      name: "조성민",
-      role: "Frontend Developer",
-      viewProjects: "프로젝트 보기",
-      goToBlog: "블로그로 이동",
     },
     education: {
       current: "재학 중",
@@ -118,19 +108,19 @@ export const dictionaries = {
     },
     projectsPage: {
       metaDescription: "sid12g의 프로젝트 목록입니다.",
-      breadcrumb: "포트폴리오",
       title: "프로젝트",
       all: "전체",
       assets: "자료",
+      team: "팀",
+      year: "연도",
+      link: "링크",
+      stack: "스택",
     },
     footer: {
       languageName: "한국어",
     },
   },
   en: {
-    nav: {
-      contact: "Contact",
-    },
     sections: {
       intro: "Intro",
       education: "Education",
@@ -138,13 +128,6 @@ export const dictionaries = {
       certifications: "Certifications",
       stack: "Stack",
       contributions: "Contributions",
-      links: "Links",
-    },
-    profile: {
-      name: "Sungmin Cho",
-      role: "Frontend Developer",
-      viewProjects: "View Projects",
-      goToBlog: "Read the Blog",
     },
     education: {
       current: "Present",
@@ -239,10 +222,13 @@ export const dictionaries = {
     },
     projectsPage: {
       metaDescription: "A list of sid12g's projects.",
-      breadcrumb: "Portfolio",
       title: "Projects",
       all: "All",
       assets: "Assets",
+      team: "Team",
+      year: "Year",
+      link: "Link",
+      stack: "Stack",
     },
     footer: {
       languageName: "English",

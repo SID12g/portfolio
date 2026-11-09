@@ -1,11 +1,7 @@
-import Divider from "@/components/Divider";
-import {
-  ArrowLeftIcon,
-  CalendarIcon,
-  CodeIcon,
-  UsersIcon,
-} from "@/components/icons";
+import { chipClass } from "@/components/Chip";
+import { ArrowLeftIcon, ArrowUpRightIcon } from "@/components/icons";
 import { MediaGallery } from "@/components/MediaPreview";
+import Section from "@/components/Section";
 import { getMdxComponents } from "@/components/mdx-components";
 import { getProjectAssets, getProjects } from "@/utils/projects";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -54,90 +50,91 @@ export default async function ProjectPage({
     ? meta.stacks.split(",").map((stack) => stack.trim())
     : [];
 
+  const source = meta.source?.replace(/^https?:\/\/(www\.)?/, "");
+  const details = [
+    { label: dict.team, value: meta.team },
+    { label: dict.year, value: meta.date },
+  ];
+
   return (
-    <div className="flex flex-col gap-11">
-      <Link
-        href={localizePath(lang, "/projects")}
-        className="-my-2 flex w-fit items-center gap-2 py-2 pr-2 text-sm leading-none font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
-      >
-        <ArrowLeftIcon className="size-3.5" />
-        {dict.title}
-      </Link>
+    <div className="flex flex-col gap-[60px]">
+      <div className="flex flex-col gap-8">
+        <Link
+          href={localizePath(lang, "/projects")}
+          className="-my-1 flex w-fit items-center gap-1.5 py-1 pr-2 text-sm leading-[1.2] font-medium text-secondary transition-colors duration-150 hover:text-primary"
+        >
+          <ArrowLeftIcon className="size-3.5" />
+          {dict.title}
+        </Link>
 
-      <div className="aspect-video w-full overflow-hidden rounded-2xl border border-surface-border">
-        <Image
-          src={meta.image}
-          alt={`${meta.title} thumbnail`}
-          width={1440}
-          height={810}
-          sizes="(min-width: 768px) 720px, 100vw"
-          className="size-full object-cover"
-          preload
-        />
-      </div>
+        <div className="aspect-video w-full overflow-hidden rounded-lg bg-surface">
+          <Image
+            src={meta.image}
+            alt={`${meta.title} thumbnail`}
+            width={1200}
+            height={675}
+            sizes="(min-width: 648px) 600px, 100vw"
+            className="size-full object-cover"
+            preload
+          />
+        </div>
 
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center gap-5">
-          <div className="size-14 shrink-0 overflow-hidden rounded-lg">
+        <div className="flex items-center gap-4">
+          <div className="size-12 shrink-0 overflow-hidden rounded-lg">
             <Image
               src={meta.logo}
               alt={`${meta.title} logo`}
-              width={112}
-              height={112}
+              width={96}
+              height={96}
               className="size-full object-cover"
             />
           </div>
-          <div className="flex min-w-0 flex-col gap-2">
-            <h1 className="text-[32px] leading-none font-semibold">
+          {/* 줄바꿈 시 줄 간격을 위해 leading 1.4를 주고, 음수 margin으로 한 줄일 때 높이는 leading 1.2와 같게 유지 */}
+          <div className="flex min-w-0 flex-col gap-2 leading-[1.4] break-keep *:-my-[0.1em]">
+            <h1 className="text-lg font-semibold text-primary">
               {meta.title}
             </h1>
-            <p className="text-base leading-[1.4] font-medium text-muted">
-              {meta.description}
-            </p>
+            <p className="text-sm text-secondary">{meta.description}</p>
           </div>
         </div>
 
-        {/* Source 버튼은 제목 옆에 두면 모바일이나 긴 설명에서 제목 영역이 좁아지므로 팀·날짜 줄 오른쪽에 배치 */}
-        <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-3">
-          <div className="flex flex-wrap items-center gap-5">
-            <span className="flex items-center gap-2 text-sm font-medium text-muted">
-              <UsersIcon className="size-3.5" />
-              {meta.team}
-            </span>
-            <span className="flex items-center gap-2 text-sm font-medium text-muted">
-              <CalendarIcon className="size-3.5" />
-              {meta.date}
-            </span>
-          </div>
-          {meta.source && (
-            <Link
-              href={meta.source}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex shrink-0 items-center gap-2 rounded-full border border-surface-border bg-background px-3.5 py-2 text-sm font-medium text-muted transition-colors duration-150 hover:bg-muted-15 hover:text-primary"
-            >
-              <CodeIcon className="size-3.5" />
-              Source
-            </Link>
-          )}
-        </div>
-
-        {stacks.length > 0 && (
-          <div className="flex flex-wrap gap-3">
-            {stacks.map((stack) => (
+        <dl className="flex flex-col gap-5 text-sm leading-[1.2]">
+          {details.map(({ label, value }) => (
+            <DetailRow key={label} label={label}>
+              <span className="text-primary">{value}</span>
+            </DetailRow>
+          ))}
+          {source && (
+            <DetailRow label={dict.link}>
               <Link
-                key={stack}
-                href={`${localizePath(lang, "/projects")}?tag=${encodeURIComponent(stack)}`}
-                className="rounded-full bg-muted-15 px-3.5 py-2 text-sm font-medium transition-colors duration-150 hover:bg-surface-border"
+                href={meta.source}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-w-0 items-center gap-1 text-primary underline decoration-line decoration-1 underline-offset-4 transition-colors duration-150 hover:decoration-current"
               >
-                {stack}
+                <span className="truncate">{source}</span>
+                <ArrowUpRightIcon className="size-3 shrink-0 text-secondary transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
-            ))}
-          </div>
-        )}
+            </DetailRow>
+          )}
+          {stacks.length > 0 && (
+            <DetailRow label={dict.stack}>
+              <ul className="flex flex-wrap gap-x-2 gap-y-2.5">
+                {stacks.map((stack) => (
+                  <li key={stack} className="flex">
+                    <Link
+                      href={`${localizePath(lang, "/projects")}?tag=${encodeURIComponent(stack)}`}
+                      className={`${chipClass} bg-invert-bg text-invert-fg transition-colors duration-150 hover:bg-invert-hover`}
+                    >
+                      {stack}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </DetailRow>
+          )}
+        </dl>
       </div>
-
-      <Divider />
 
       <article className="prose-custom">
         <MDXRemote
@@ -148,8 +145,7 @@ export default async function ProjectPage({
       </article>
 
       {assets.length > 0 && (
-        <section className="flex flex-col gap-8">
-          <h2 className="text-xl leading-none font-bold">{dict.assets}</h2>
+        <Section title={dict.assets}>
           <MediaGallery
             lang={lang}
             items={assets.map((a) => ({
@@ -158,8 +154,23 @@ export default async function ProjectPage({
               type: a.type,
             }))}
           />
-        </section>
+        </Section>
       )}
+    </div>
+  );
+}
+
+function DetailRow({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex gap-6 sm:gap-10">
+      <dt className="w-16 shrink-0 text-secondary sm:w-[100px]">{label}</dt>
+      <dd className="flex min-w-0 flex-1">{children}</dd>
     </div>
   );
 }

@@ -97,7 +97,7 @@ function toEmbedUrl(url: string): string {
 }
 
 const tileClass =
-  "group relative flex aspect-[4/3] w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-surface-border bg-muted-5 text-left transition-colors duration-150 hover:border-divider";
+  "group relative flex aspect-[4/3] w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-line bg-surface text-left transition-colors duration-150 hover:bg-surface-strong";
 
 function DocumentTile({
   item,
@@ -108,7 +108,7 @@ function DocumentTile({
 }) {
   return (
     <span className="flex size-full flex-col justify-between p-4">
-      <span className="flex items-start justify-between text-muted">
+      <span className="flex items-start justify-between text-secondary">
         {item.type === "pdf" ? (
           <FileIcon className="size-[18px]" />
         ) : (
@@ -117,10 +117,10 @@ function DocumentTile({
         <ArrowUpRight16Icon className="size-4 transition-colors duration-150 group-hover:text-primary" />
       </span>
       <span className="flex min-w-0 flex-col gap-1.5">
-        <span className="line-clamp-2 text-sm leading-[1.4] font-semibold break-all text-primary">
+        <span className="line-clamp-2 text-sm leading-[1.4] font-medium break-all text-primary">
           {item.name}
         </span>
-        <span className="text-xs leading-none font-medium text-muted">
+        <span className="text-xs leading-none font-medium text-tertiary">
           {label}
         </span>
       </span>
@@ -145,7 +145,7 @@ export function MediaGallery({
 
   return (
     <>
-      <div className={`grid grid-cols-2 gap-3 sm:grid-cols-3 ${className}`}>
+      <div className={`grid grid-cols-2 gap-2.5 sm:grid-cols-3 ${className}`}>
         {items.map((item) =>
           item.type === "link" ? (
             <a
@@ -194,7 +194,7 @@ export function MediaGallery({
                 <DocumentTile item={item} label={dict.pdf} />
               )}
               {item.type === "other" && (
-                <span className="flex size-full items-center justify-center p-4 text-center text-sm break-all text-muted">
+                <span className="flex size-full items-center justify-center p-4 text-center text-sm break-all text-secondary">
                   {item.name}
                 </span>
               )}

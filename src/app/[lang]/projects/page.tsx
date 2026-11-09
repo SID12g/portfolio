@@ -1,12 +1,9 @@
-import Link from "next/link";
 import { Suspense } from "react";
-import Divider from "@/components/Divider";
-import { ArrowLeftIcon } from "@/components/icons";
 import ProjectList, {
   ProjectListFallback,
 } from "@/components/section/ProjectList";
 import { getProjects } from "@/utils/projects";
-import { localizePath, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
 export async function generateMetadata({
@@ -39,20 +36,15 @@ export default async function ProjectsPage({
   const listProps = { lang, projects, allLabel: dict.all };
 
   return (
-    <div className="flex flex-col gap-11">
-      <div className="flex flex-col gap-6">
-        <Link
-          href={localizePath(lang, "/")}
-          className="-my-2 flex w-fit items-center gap-2 py-2 pr-2 text-sm leading-none font-medium text-nav-inactive transition-colors duration-150 hover:text-primary"
-        >
-          <ArrowLeftIcon className="size-3.5" />
-          {dict.breadcrumb}
-        </Link>
-        <h1 className="text-[40px] leading-none font-bold">
-          {dict.title}
+    <div className="flex flex-col gap-[60px]">
+      <div className="flex flex-col gap-3">
+        <h1 className="font-mono text-lg leading-[1.2] font-semibold text-primary">
+          Projects
         </h1>
+        <p className="font-mono text-sm leading-[1.2] font-medium text-secondary">
+          {projects.length} projects
+        </p>
       </div>
-      <Divider />
       <Suspense fallback={<ProjectListFallback {...listProps} />}>
         <ProjectList {...listProps} />
       </Suspense>
