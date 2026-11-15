@@ -11,19 +11,21 @@ stacks: React, FastAPI, Supabase
 order: 12
 ---
 
-> This project is an entry to [JunctionX Korea 2026](https://blog.sid12g.dev/junctionx-korea-2026).
+> This project is an entry to [JunctionX Korea 2026](https://blog.sid12g.dev/junctionx-korea-2026). You can find the presentation slides [here](https://afo-presentation.vercel.app/presentation.pdf).
 
 ### 1. Overview
 
 Multi-agent squads that combine several small models into role-specific collaborators are increasingly showing that, when well designed, they can outperform a single frontier model at problem solving.
 
-But as squads get more sophisticated, it's gotten harder for users to see how a squad is composed, and in what order and relationship each agent breaks down and works on a problem. Existing AI interfaces flatten work that multiple agents perform in parallel into a single, linear conversation.
+But the more agents work in parallel, the harder it is for people to see the thought process each agent goes through to solve a problem. Existing AI interfaces flatten work that multiple agents perform at the same time into a single, linear conversation, so there's no way to tell how a squad is composed, or in what order and relationship each agent broke down and worked on the problem.
 
-AFO (All Forward One) was built to solve this problem — it's a tool that visualizes, as a node-based graph, how a squad made up of a `Planner` and several specialized agents works through a user's request.
+AFO (All Forward One) was built to solve this problem — when a user asks a question, it visualizes how a squad made up of a `Planner` and several specialized agents works through it, as a node-based graph that preserves the parallel structure.
 
 Users can see the squad's composition at a glance, and interactively follow which order (vertical axis) and parallel relationship (horizontal axis) each agent ran in, along with the input it received and the output it produced.
 
-I built this project with team Bean Noodles, taking on a full-stack role developing both the `React`-based client and the `FastAPI`-based server.
+I built this project with team Bean Noodles, made up of a designer, a frontend developer, a full-stack developer, and an AI developer. As the full-stack developer, I developed both the `React`-based client and the `FastAPI`-based server, worked on improving the squad's performance, and served as the point of contact with the Lablup staff along the way.
+
+By researching different agent configurations, our team also recorded the 3rd-highest benchmark score among the 14 participating teams.
 
 ### 2. System Architecture
 
@@ -45,6 +47,12 @@ I built the server with `FastAPI` and `Python`, using `Supabase` as the database
 
 While putting the squad together, I spent a lot of time researching different agent collaboration structures — Planner-Solver-Judge, Solver-Aggregator, and more — sketching candidate configurations by hand and comparing and validating them. Through this, I came to feel that how clearly you separate roles and prompts matters more for a squad's performance than simply adding more agents.
 
-Building a visualization that lets users follow multiple agents running in parallel — not tediously, but in a way that's actually engaging — turned out to be trickier than I expected. Before landing on the node graph structure, where the vertical axis represents order and the horizontal axis represents parallelism, I had to try and refine several different layouts.
+We had three models to choose from for our agents — Qwen, gpt-oss, and EXAONE — and after benchmarking a range of combinations, the configuration that used gpt-oss for every agent scored the highest.
 
-Building both the `React` client and the `FastAPI` server let me build a product end to end for the first time — authentication, squad parsing, and near real-time graph playback all included — and gave me a lot to think about in terms of how to design a multi-agent system that people can actually trust and understand.
+While using Lablup's Backend.AI GO, I used Claude Code to figure out that changing the timeout value in the router settings broke the `/ai.backend.go/router_config.yaml` file. I reported this to the organizers, and the fix was included in a new release.
+
+After building our squad to improve the performance of the agents provided by Lablup and FuriosaAI, I was also analyzing the logs and noticed that, judging by the timestamps, the agents appeared to be running serially rather than in parallel. After discussing it with the Lablup staff, we confirmed that the agents were in fact being processed in parallel and that the issue was in the logs themselves.
+
+Building a visualization that lets users follow multiple agents running in parallel — not tediously, but in a way that's actually engaging — also turned out to be trickier than I expected. Before landing on the node graph structure, where the vertical axis represents order and the horizontal axis represents parallelism, I had to try and refine several different layouts.
+
+Building both the `React` client and the `FastAPI` server let me build a product end to end for the first time — authentication, squad parsing, and near real-time graph playback all included. It also taught me not to just take the tools I'm given at face value, but to verify anything that looks off and work it out together with the people who provide them — and it gave me a lot to think about in terms of how to design a multi-agent system that people can actually trust and understand.
