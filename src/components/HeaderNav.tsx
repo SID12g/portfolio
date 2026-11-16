@@ -22,7 +22,6 @@ export default function HeaderNav({ projectsHref }: { projectsHref: string }) {
       </Link>
       <a
         href="https://blog.sid12g.dev"
-        target="_blank"
         rel="noopener noreferrer"
         className={linkClass}
       >
